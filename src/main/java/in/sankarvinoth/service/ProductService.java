@@ -8,7 +8,7 @@ public class ProductService {
 	private ProductService() {
 		//private constructor to avoid object creation
 	}
-	private static final Map<Integer, String> products = new TreeMap<Integer, String>();
+	private static final Map<Integer, String> products = new TreeMap<>();
 	static {
 		// List of products in the map
 		products.put(1, "Air Conditioner");
