@@ -25,6 +25,6 @@ public class ProductsServiceTest {
 	public void testCase2() {
 		// calling the getProducts method to check the size of Products in map
 		Map<Integer, String> productDisplay = ProductService.getProducts();
-		assertEquals(1, productDisplay.size());
+		assertEquals(10, productDisplay.size());
 	}
 }
