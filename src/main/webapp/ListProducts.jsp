@@ -26,7 +26,7 @@
 						i++;
 						%>
 			      <tr>
-			     <td><%=serialNo%></td>
+			     <td><%=i%></td>
 			     <td><%=productName%></td> 
 			     </tr>
 				 <% } %>
