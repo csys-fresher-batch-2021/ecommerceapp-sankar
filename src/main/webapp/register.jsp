@@ -54,7 +54,7 @@
 		<li>minimum and maximum length for username (6-13).</li>
 		<li>password and confirm password should be in alphanumeric
 			only,should not contain spaces.</li>
-		<li>minimum and maximum length for password (6-8).</li>
+		<li>minimum and maximum length for password(6-8).</li>
 		</ol>
 </body>
 </html>
