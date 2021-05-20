@@ -28,7 +28,7 @@
 			pattern="^[A-Z][A-Za-z]{4,29}$" title="Name should be in alphabets"
 			title="fullname should be in given format" autofocus required><br />
 		<label>UserName</label> <input type="text" name="username"
-			placeholder="Enter username" pattern="^[a-z][a-z0-9]{5,12}$"
+			placeholder="Enter username" pattern="^[A-Za-z][A-Za-z0-9]{5,12}$"
 			size="13" title="username should be in given format" required><br />
 
 		<label>Phone.no</label> <input type="number" name="number"
@@ -47,14 +47,14 @@
 	
 		<h3>Instructions:</h3>
 		<ol>
-		<li>fullname should be in alphabets only,should not contain spaces</li>
-		<li>minimum and maximum length for fullname (5-30)</li>
+		<li>fullname should be in alphabets only,should not contain spaces.</li>
+		<li>minimum and maximum length for fullname (5-30).</li>
 		<li>username should be in alphanumeric only,should not contain
-			spaces,but captital letters are not allowed</li>
-		<li>minimum and maximum length for fullname (6-13)</li>
+			  spaces.</li>
+		<li>minimum and maximum length for username (6-13).</li>
 		<li>password and confirm password should be in alphanumeric
-			only,should not contain spaces,but captital letters are not allowed</li>
-		<li>minimum and maximum length for fullname (6-13)</li>
+			only,should not contain spaces.</li>
+		<li>minimum and maximum length for password (6-8).</li>
 		</ol>
 </body>
 </html>

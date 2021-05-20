@@ -29,7 +29,7 @@ public class UserInputValidator {
 	 * @return
 	 */
 	public static boolean usernameValidation(String username) {
-		final String regularExpression ="^[a-z][a-z0-9]{5,12}$";
+		final String regularExpression ="^[A-Za-z][A-Za-z0-9]{5,12}$";
 		boolean isValidusername = false;
 		if (StringValidator.isValidString(username)) {
 			if (username.matches(regularExpression)) {
