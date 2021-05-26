@@ -48,17 +48,18 @@ public class RegisterServlet extends HttpServlet {
 		user.setPassword(password);
 		user.setPassword(confirmPassword);
 		// checking whether the user is already registered
+	
 		boolean isAdded = UserRegistrationService.addUserToUserRegister(user);
-
-		if (isAdded) {
+        if(isAdded) {
+		  {
 			response.sendRedirect("LoginPage.jsp");
-		}
-
+		 }
+       }
 		else {
 			String message = "Invalid credentials";
 			response.sendRedirect("register.jsp?errorMessage=" + message);
 
 		}
-
 	}
 }
+	

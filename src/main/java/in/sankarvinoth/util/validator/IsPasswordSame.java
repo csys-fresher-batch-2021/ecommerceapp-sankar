@@ -1,6 +1,11 @@
 package in.sankarvinoth.util.validator;
 
 public class IsPasswordSame {
+	
+	private IsPasswordSame() {
+		
+	}
+
 	/**
 	 * method to check whether the password and confirm password same
 	 * 
@@ -8,18 +13,8 @@ public class IsPasswordSame {
 	 * @param confirmPassword
 	 * @return
 	 */
-	public static boolean IsPasswordAndConfirmPasswordSame(String password, String confirmPassword) {
-		boolean isSamePassword = false;
-		boolean isValidPassword=UserInputValidator.passwordValidation(password);
-		boolean isValidConfirmPassword=UserInputValidator.passwordValidation(confirmPassword);
-		if(isValidPassword && isValidConfirmPassword) {
-		if (password.equals(confirmPassword)) {
-			isSamePassword = true;
-		} else {
-			isSamePassword = false;
-		}
+	public static boolean isPasswordAndConfirmPasswordSame(String password, String confirmPassword) {
+		return (password.equals(confirmPassword)); 
 		
-	}
-		return isSamePassword;
 }
 }
