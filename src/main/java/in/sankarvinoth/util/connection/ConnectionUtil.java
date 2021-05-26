@@ -1,4 +1,4 @@
-package in.sankarvinoth.util.Connection;
+package in.sankarvinoth.util.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,10 +16,7 @@ public class ConnectionUtil {
 	}
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-//		String driverClass = "org.postgresql.Driver";
-//		String url = "jdbc:postgresql://localhost/ecommerce_db";
-//		String username = "postgres";
-//		String password = "postgresql";
+
 		String driverClass = System.getenv("spring.datasource.driver-class-name");
 		String url = System.getenv("spring.datasource.url");
 		String username = System.getenv("spring.datasource.username");
@@ -27,7 +24,7 @@ public class ConnectionUtil {
 		Class.forName(driverClass);
 		// getting connection from db
 		Connection connection = DriverManager.getConnection(url, username, password);
-		Logger.logger("connection established");
+		Logger.log("connection established");
 		return connection;
 	}
 
@@ -35,7 +32,7 @@ public class ConnectionUtil {
 		try {
 			if (con != null) {
 				con.close();
-				Logger.logger("connection released");
+				Logger.log("connection released");
 			}
 
 		} catch (SQLException e) {
@@ -50,7 +47,7 @@ public class ConnectionUtil {
 
 			if (pst != null) {
 				pst.close();
-				Logger.logger("prepared statement released");
+				Logger.log("prepared statement released");
 			}
 
 		} catch (SQLException e) {
@@ -64,7 +61,7 @@ public class ConnectionUtil {
 
 			if (rst != null) {
 				rst.close();
-				Logger.logger("resultset released");
+				Logger.log("resultset released");
 			}
 
 		} catch (SQLException e) {
@@ -78,7 +75,7 @@ public class ConnectionUtil {
 
 			if (st!= null) {
 				st.close();
-			Logger.logger("statement released");
+			Logger.log("statement released");
 			}
 
 		} catch (SQLException e) {
@@ -87,3 +84,5 @@ public class ConnectionUtil {
 		}
 	}
 }
+
+

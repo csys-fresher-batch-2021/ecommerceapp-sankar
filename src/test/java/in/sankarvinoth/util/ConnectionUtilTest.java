@@ -3,7 +3,7 @@ package in.sankarvinoth.util;
 import java.sql.Connection;
 
 
-import in.sankarvinoth.util.Connection.ConnectionUtil;
+import in.sankarvinoth.util.connection.ConnectionUtil;
 
 
 

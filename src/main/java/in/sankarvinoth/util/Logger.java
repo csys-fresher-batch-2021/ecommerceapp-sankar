@@ -2,7 +2,7 @@ package in.sankarvinoth.util;
 
 public class Logger {
 
-	public static void logger(String message) {
+	public static void log(String message) {
 		System.out.println(message);
 	}
 
