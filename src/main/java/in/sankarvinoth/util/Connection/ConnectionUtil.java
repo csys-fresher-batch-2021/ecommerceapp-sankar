@@ -7,7 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import in.sankarvinoth.util.Logger;
+
 public class ConnectionUtil {
+
+	private ConnectionUtil() {
+		
+	}
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 //		String driverClass = "org.postgresql.Driver";
@@ -21,7 +27,7 @@ public class ConnectionUtil {
 		Class.forName(driverClass);
 		// getting connection from db
 		Connection connection = DriverManager.getConnection(url, username, password);
-		System.out.println("Connection Established");
+		Logger.logger("connection established");
 		return connection;
 	}
 
@@ -29,7 +35,7 @@ public class ConnectionUtil {
 		try {
 			if (con != null) {
 				con.close();
-				System.out.println("connection released");
+				Logger.logger("connection released");
 			}
 
 		} catch (SQLException e) {
@@ -44,7 +50,7 @@ public class ConnectionUtil {
 
 			if (pst != null) {
 				pst.close();
-				System.out.println("prepared statement released");
+				Logger.logger("prepared statement released");
 			}
 
 		} catch (SQLException e) {
@@ -58,7 +64,7 @@ public class ConnectionUtil {
 
 			if (rst != null) {
 				rst.close();
-				System.out.println("resultset released");
+				Logger.logger("resultset released");
 			}
 
 		} catch (SQLException e) {
@@ -72,7 +78,7 @@ public class ConnectionUtil {
 
 			if (st!= null) {
 				st.close();
-				System.out.println("statement released");
+			Logger.logger("statement released");
 			}
 
 		} catch (SQLException e) {

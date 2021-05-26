@@ -2,6 +2,11 @@ package in.sankarvinoth.util.validator;
 
 
 public class UserInputValidator {
+	
+	private UserInputValidator() {
+		
+	}
+
 	/**
 	 * method to validate fullname
 	 * 

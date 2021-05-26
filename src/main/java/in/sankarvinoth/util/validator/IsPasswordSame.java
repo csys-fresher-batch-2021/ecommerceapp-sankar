@@ -1,6 +1,11 @@
 package in.sankarvinoth.util.validator;
 
 public class IsPasswordSame {
+	
+	private IsPasswordSame() {
+		
+	}
+
 	/**
 	 * method to check whether the password and confirm password same
 	 * 

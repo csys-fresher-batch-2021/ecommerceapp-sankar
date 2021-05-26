@@ -1,7 +1,7 @@
 package in.sankarvinoth.util;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+
 
 import in.sankarvinoth.util.Connection.ConnectionUtil;
 

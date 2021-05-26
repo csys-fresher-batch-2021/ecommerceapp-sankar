@@ -9,6 +9,11 @@ import in.sankarvinoth.model.Product;
 
 public class DisplayProductService {
 
+     private DisplayProductService() {
+		
+		
+	}
+
 	public static List<Product> getAllProductsfromDb() {
 
 		DisplayProductsDao dao = new DisplayProductsDaoImp();

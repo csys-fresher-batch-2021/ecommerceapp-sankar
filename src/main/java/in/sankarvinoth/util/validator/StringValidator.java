@@ -1,6 +1,11 @@
 package in.sankarvinoth.util.validator;
 
 public class StringValidator {
+	
+	private StringValidator() {
+		
+	}
+
 	/**
 	 * method to validate the string using the given conditions
 	 * 
