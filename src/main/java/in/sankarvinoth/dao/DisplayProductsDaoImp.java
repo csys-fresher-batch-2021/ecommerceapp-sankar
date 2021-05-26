@@ -1,7 +1,7 @@
 package in.sankarvinoth.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -48,6 +48,7 @@ public class DisplayProductsDaoImp implements DisplayProductsDao {
 			// closing the connection
 			ConnectionUtil.close(con);
 			ConnectionUtil.close(rst);
+			ConnectionUtil.close(st);
 		}
 
 		return products;
