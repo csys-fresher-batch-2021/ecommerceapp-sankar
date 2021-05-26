@@ -2,7 +2,7 @@ package in.sankarvinoth.util.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,39 +28,19 @@ public class ConnectionUtil {
 		return connection;
 	}
 
-	public static void close(Connection con) {
+	public static void close(Connection con,Statement st,ResultSet rs) {
 		try {
 			if (con != null) {
 				con.close();
 				Logger.log("connection released");
 			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void close(PreparedStatement pst) {
-		try {
-
-			if (pst != null) {
-				pst.close();
+			if (st != null) {
+				st.close();
 				Logger.log("prepared statement released");
 			}
 
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-	}
-
-	public static void close(ResultSet rst) {
-		try {
-
-			if (rst != null) {
-				rst.close();
+			if (rs != null) {
+				rs.close();
 				Logger.log("resultset released");
 			}
 
@@ -68,21 +48,15 @@ public class ConnectionUtil {
 
 			e.printStackTrace();
 		}
+
 	}
+
 	
-	public static void close(Statement st) {
-		try {
 
-			if (st!= null) {
-				st.close();
-			Logger.log("statement released");
-			}
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-	}
+	
+	
+	
+	
 }
 
 

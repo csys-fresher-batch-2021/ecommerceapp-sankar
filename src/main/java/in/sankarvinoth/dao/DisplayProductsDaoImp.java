@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.sankarvinoth.model.Product;
-import in.sankarvinoth.util.Connection.ConnectionUtil;
+import in.sankarvinoth.util.connection.ConnectionUtil;
 
 public class DisplayProductsDaoImp implements DisplayProductsDao {
 
@@ -46,9 +46,8 @@ public class DisplayProductsDaoImp implements DisplayProductsDao {
 			e.printStackTrace();
 		} finally {
 			// closing the connection
-			ConnectionUtil.close(con);
-			ConnectionUtil.close(rst);
-			ConnectionUtil.close(st);
+			ConnectionUtil.close(con,st,rst);
+			
 		}
 
 		return products;

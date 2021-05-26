@@ -22,7 +22,6 @@ public class DisplayProductService {
 		// copy of getAllProducts List
 		List<Product> product = new ArrayList<>(products);
 		return product;
-
 	}
 
 }
