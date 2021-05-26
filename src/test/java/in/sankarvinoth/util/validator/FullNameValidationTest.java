@@ -24,17 +24,9 @@ public class FullNameValidationTest {
 		assertFalse(isValidUserName);
 	}
 
-	@Test
-	public void testCaseForFullNameWithLessThanEightCharacters() {
-		boolean isValidUserName = UserInputValidator.fullnameValidation("Sanka");
-		assertFalse(isValidUserName);
-	}
+	
 
-	@Test
-	public void testCaseForFullNameWithInBetweenWhiteSpaces() {
-		boolean isValidUserName = UserInputValidator.fullnameValidation("Sanka vinoth");
-		assertFalse(isValidUserName);
-	}
+	
 
 	@Test
 	public void testCaseForFullNameWithNumberInName() {

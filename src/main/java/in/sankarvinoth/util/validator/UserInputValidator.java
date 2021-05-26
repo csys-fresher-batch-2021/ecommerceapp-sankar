@@ -1,6 +1,5 @@
 package in.sankarvinoth.util.validator;
 
-import in.sankarvinoth.model.User;
 
 public class UserInputValidator {
 	/**
@@ -69,7 +68,7 @@ public class UserInputValidator {
 	 */
 	
 	public static boolean passwordValidation(String password) {
-		final String regularExpression = "^[a-z][a-z0-9]{5,7}$";
+		final String regularExpression = "^[A-Za-z0-9]{5,8}$";
 		
 		boolean isValidPassword = false;
 		if (StringValidator.isValidString(password)) {
@@ -103,4 +102,20 @@ public class UserInputValidator {
 		return isValidInput;
 
 	}
-}
+	
+	public static boolean usernameAndPasswordValidation(String username, String password) {
+		boolean isValidInput = false;
+		if (StringValidator.isValidString(username) &&  StringValidator.isValidString(password)) {
+			if (usernameValidation(username)&&UserInputValidator.passwordValidation(password)) {
+				isValidInput = true;
+			} else {
+				isValidInput = false;
+			}
+
+		}
+		return isValidInput;
+    }
+	
+	}
+	
+
