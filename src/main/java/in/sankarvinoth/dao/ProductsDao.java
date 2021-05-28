@@ -4,6 +4,7 @@ import java.util.List;
 
 import in.sankarvinoth.model.Product;
 
-public interface DisplayProductsDao {
+public interface ProductsDao {
 	List<Product> getAllProducts();
-}
+	List<Product> searchForProduct(String searchedProduct);
+	}

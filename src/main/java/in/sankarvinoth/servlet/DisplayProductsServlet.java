@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import in.sankarvinoth.model.Product;
 
-import in.sankarvinoth.service.DisplayProductService;
+import in.sankarvinoth.service.ProductService;
 
 /**
  * Servlet implementation class DisplayProductsServlet
@@ -34,7 +34,10 @@ public class DisplayProductsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// calling the service class to get all products List
-		List<Product> products = DisplayProductService.getAllProductsfromDb();
+	    
+		
+		
+		 List<Product> products = ProductService.getAllProductsfromDb();
 		Gson gson = new Gson();
 		// converting the list to json
 		String json = gson.toJson(products);

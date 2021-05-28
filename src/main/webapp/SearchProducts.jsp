@@ -14,11 +14,9 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>Products available in our shops</h3>
-		        <form  action ="SearchProducts.jsp" method="post">
-		      <input class="form-control me-2" type="search"  name="searchedProduct" placeholder="Search  for products,brands and more" required>
-              <button type="submit" value="search" class="btn btn-outline-success">Search</button>
-          </form>
+		<h3>Search Results</h3>
+		<% String searchedProduct=request.getParameter("searchedProduct");%>
+		       
 		
 
 		<table class="table table-bordered">
@@ -32,10 +30,10 @@
 					<th scope ="col">Product Price(in Rs.)</th>
 					<th scope ="col">Product quantity</th>
 					<th scope ="col">Service Status</th>
-					<th scope ="col">Order Here</th>
+					<th scope ="col">Delete</th>
 					</tr>
 				 
-					<% List<Product> products=ProductService.getAllProductsfromDb();
+					<% List<Product> products=ProductService.getSearchResults(searchedProduct);
 					 int  i=0;
 		    		  %>
 		    		  
@@ -60,7 +58,7 @@
 			      <td><%=amount%></td>
 			      <td><%=quantity%></td>
 			       <td><%=status%></td>
-			        <td><a href="" >Add to Cart</a></td>
+			        <td>Delete</td>
 			        </tr>
 				 <% }
 					} %>
