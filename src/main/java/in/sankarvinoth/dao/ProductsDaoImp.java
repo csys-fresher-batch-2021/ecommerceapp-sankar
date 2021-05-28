@@ -74,7 +74,8 @@ public class ProductsDaoImp implements ProductsDao {
 			con = ConnectionUtil.getConnection();
 
 			st = con.createStatement();
-			rst = st.executeQuery("select * from productInfo where ProductName ~* '"+searchedProduct+"'  or Category ~* '"+searchedProduct+"'  ");
+			String sql="select * from productInfo where ProductName ~* '"+searchedProduct+"'  or Category ~* '"+searchedProduct+"'";
+			rst = st.executeQuery(sql);
 			while (rst.next()) {
 
 				String productName = rst.getString("ProductName");
