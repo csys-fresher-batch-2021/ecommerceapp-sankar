@@ -30,7 +30,7 @@
 					<th scope ="col">Product Price(in Rs.)</th>
 					<th scope ="col">Product quantity</th>
 					<th scope ="col">Service Status</th>
-					<th scope ="col">Delete</th>
+					<th scope ="col">Order Here</th>
 					</tr>
 				 
 					<% List<Product> products=ProductService.getSearchResults(searchedProduct);
@@ -58,7 +58,7 @@
 			      <td><%=amount%></td>
 			      <td><%=quantity%></td>
 			       <td><%=status%></td>
-			        <td>Delete</td>
+			        <td><a href="AddToCartServlet?Id=<%=productId%>">Add to Cart</a></td>
 			        </tr>
 				 <% }
 					} %>

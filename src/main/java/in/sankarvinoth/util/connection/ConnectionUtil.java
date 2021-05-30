@@ -2,7 +2,7 @@ package in.sankarvinoth.util.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -48,6 +48,22 @@ public class ConnectionUtil {
 
 			e.printStackTrace();
 		}
+	}
+		public static void close(Connection con,PreparedStatement pst) {
+			try {
+				if (con != null) {
+					con.close();
+					Logger.log("connection released");
+				}
+				if (pst != null) {
+					pst.close();
+					Logger.log("prepared statement released");
+				}
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
 
 	}
 
