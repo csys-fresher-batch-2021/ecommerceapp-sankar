@@ -60,7 +60,8 @@
 			      <td><%=amount%></td>
 			      <td><%=quantity%></td>
 			       <td><%=status%></td>
-			        <td><a href="" >Add to Cart</a></td>
+			   
+			        <td><a href="AddToCartServlet?Id=<%=productId%>">Add to Cart</a></td>
 			        </tr>
 				 <% }
 					} %>
@@ -69,6 +70,8 @@
 				 
 			</thead>
 				</table>
+				
+				<a href="ViewCartItems.jsp"><input type="button" value="View Cart"></a>
 	</main>
 
 </body>
