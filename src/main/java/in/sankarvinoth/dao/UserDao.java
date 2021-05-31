@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 import in.sankarvinoth.model.User;
@@ -87,6 +88,59 @@ public class UserDao {
 				user.setUserName(username);
 				user.setEmail(emails);
 				user.setPhoneNumber(phoneNumber1);
+
+				// getting the values in ArrayList
+				users.add(user);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// closing the connection
+			ConnectionUtil.close(con, st, rst);
+
+		}
+		return users;
+
+	}
+
+	/**
+	 * method to verify Login , whether the user is registered or not
+	 * 
+	 * @param user
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public static List<User> userLoginVerification(String userName, String password)
+			throws ClassNotFoundException, SQLException {
+
+		List<User> users = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rst = null;
+
+		try {
+			// getting the connection
+			con = ConnectionUtil.getConnection();
+			String sql = ("select * from UserRegister where userName='" + userName + "' and password ='" + password
+					+ "'");
+
+			st = con.prepareStatement(sql);
+
+			rst = st.executeQuery();
+			while (rst.next()) {
+				String fullname = rst.getString("fullName");
+				String username = rst.getString("userName");
+				String emails = rst.getString("email");
+				Long phoneNumber1 = rst.getLong("mobileNumber");
+				String password1 = rst.getString("password");
+				User user = new User();
+				user.setFullName(fullname);
+				user.setUserName(username);
+				user.setEmail(emails);
+				user.setPhoneNumber(phoneNumber1);
+				user.setPassword(password1);
 
 				// getting the values in ArrayList
 				users.add(user);
