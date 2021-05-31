@@ -30,7 +30,29 @@ public class UserInputsValidator {
 			isValidInputs=true;
 		}
 		return isValidInputs;
+	
+	}
+	/**
+     * method to validate the user Login Credentials such as  username and password.
+     * 
+     * 
+     * @param username
+     *@param password
+     * @return
+     */
+	
+	public  static boolean userLoginValidator(String username,String password) {
+		boolean isValidInputs=false;
 		
+		boolean isValidusername=StringValidator.isValidString(username);
+		// email validation
+		boolean isValidPassword=StringValidator.isValidString(password);
+		// email validation
+		
+		if( isValidusername && isValidPassword ) {
+			isValidInputs=true;
+		}
+		return isValidInputs;
 	
 	}
 

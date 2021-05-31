@@ -12,23 +12,24 @@ public class UserRegistrationservice {
 		super();
 	}
 
-	/** 
-	 * method to validate and add the user datails to the register 
+	/**
+	 * method to validate and add the user datails to the register
+	 * 
 	 * @param user
 	 * @return
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
 	public static boolean userregistrationService(User user) throws ClassNotFoundException, SQLException {
-	boolean isValidRegistration=false;
-	    // validation for new user and existing user
-		boolean isNewUser=UserValidator.userValidation(user);
-		
-		if(isNewUser) {
+		boolean isValidRegistration = false;
+		// validation for new user and existing user
+		boolean isNewUser = UserValidator.userValidation(user);
+
+		if (isNewUser) {
 			UserDao.addUserToUserRegister(user);
-			isValidRegistration=true;
+			isValidRegistration = true;
 		}
 		return isValidRegistration;
-		
+
 	}
 }
