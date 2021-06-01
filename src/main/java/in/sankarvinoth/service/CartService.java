@@ -7,9 +7,9 @@ import in.sankarvinoth.dao.CartDao;
 import in.sankarvinoth.dao.CartDaoImp;
 import in.sankarvinoth.model.Product;
 
-public class AddToCartService {
+public class CartService {
 
-	private AddToCartService() {
+	private CartService() {
 
 	}
 
@@ -42,5 +42,31 @@ public class AddToCartService {
 		return productsInTheCart;
 
 	}
+	
+	/**
+	 * method to delete the product which maps with the product Id given from remove from cart servlet
+	 * @param products
+	 * @param productId
+	 * @return
+	 */
+	public static boolean deleteProductFromCart(List<Product> products,String productId) {
+		boolean isDeleted=false;
+		Product isExists = null;
+		for(Product product:products ) {
+			if(product.getProductId().equalsIgnoreCase(productId)) {
+				isExists= product;
+				break;
+			}
+		}
+		if(isExists!= null) {
+			products.remove(isExists);
+			isDeleted=true;
+			
+		}
+		return isDeleted ;
+		
+	}
+	 
+	
 
 }

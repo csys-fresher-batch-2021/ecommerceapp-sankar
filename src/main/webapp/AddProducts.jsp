@@ -33,7 +33,7 @@
 <label>Price of the Product</label>
 <input type="number"  name="productPrice" placeholder="Enter ProductPrice" required > <br/>
 <label>Quantities available</label>
-<input type="number"  name="productquantity" placeholder="Enter no.of.Quantity" required > <br/>
+<input type="number"  name="productquantity" placeholder="Enter no.of.Quantity" min="1" max="500" required > <br/>
 <label>Status of product</label>
 <input type="text"  name="productstatus" placeholder="available or not available" required > <br/>
 <button type="submit" class="btn btn-primary">Add</button>
