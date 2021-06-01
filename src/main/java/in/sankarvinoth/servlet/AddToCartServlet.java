@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import in.sankarvinoth.model.Product;
-import in.sankarvinoth.service.AddToCartService;
+import in.sankarvinoth.service.CartService;
 import in.sankarvinoth.util.validator.RepeatedProductsValidator;
 
 /**
@@ -27,10 +27,10 @@ public class AddToCartServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String productId = request.getParameter("Id");
 		boolean isNewProductId = RepeatedProductsValidator.isNewProductTocart(productId);
-		// validating whether the productId is new to the arraylist;
+		//validating whether the productId is new to the arraylist;
 		if (!isNewProductId) {
-			List<String> productsIds = AddToCartService.getAllProductIds(productId);
-			List<Product> products = AddToCartService.addProductToCartService(productsIds);
+			List<String> productsIds = CartService.getAllProductIds(productId);
+			List<Product> products = CartService.addProductToCartService(productsIds);
 			HttpSession session = request.getSession();
 			// storing the list in the session
 			session.setAttribute("productslist", products);

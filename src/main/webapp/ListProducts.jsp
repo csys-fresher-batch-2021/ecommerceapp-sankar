@@ -84,7 +84,7 @@
 			</thead>
 				</table>
 				
-				<a href="AddToCart.jsp"><input type="button" value="View Cart"></a>
+				<a href="Cart.jsp"><input type="button" value="View Cart"></a>
 	</main>
 
 </body>
