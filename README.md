@@ -7,4 +7,4 @@
 #### 4)Search product by ProductName and category feature
 #### 5)Add Products Feature
 #### 6) Add Product to the cart feature
-
+#### 7) Remove Product from cart feature 
