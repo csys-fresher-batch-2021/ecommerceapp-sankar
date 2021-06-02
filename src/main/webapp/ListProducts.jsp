@@ -45,11 +45,12 @@
 					<th scope ="col">Product quantities available</th>
 					<th scope ="col">Service Status</th>
 					<th scope ="col">Order Here</th>
+					<th scope ="col">Edit</th>
 					</tr>
 				 
 					<% List<Product> products=ProductService.getAllProductsfromDb();
 					 int  i=0;
-		    		  int quantityneeded=1;
+		    		  
 		    		 
 		    		  %>
 		    		  
@@ -79,6 +80,7 @@
 			       <td><%=status%></td>
 			       
 			        <td><a href="AddToCartServlet?Id=<%=productId%>">Add to Cart</a></td>
+			        <td><a href="EditProducts.jsp?Id=<%=productId%>">Edit Product</a></td>
 			        </tr>
 				 <% }
 					} %>

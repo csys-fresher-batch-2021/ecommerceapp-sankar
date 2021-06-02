@@ -1,6 +1,6 @@
 package in.sankarvinoth.dao;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
 import in.sankarvinoth.model.Product;
@@ -8,5 +8,7 @@ import in.sankarvinoth.model.Product;
 public interface ProductsDao {
 	List<Product> getAllProducts();
 	List<Product> searchForProduct(String searchedProduct);
+	List<Product> searchProductByProductId(String productId);
+	List<Product> updateStock(Product product);
 	
 	}

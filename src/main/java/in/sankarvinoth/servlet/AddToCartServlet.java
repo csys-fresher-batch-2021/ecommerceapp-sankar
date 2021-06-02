@@ -26,8 +26,8 @@ public class AddToCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String productId = request.getParameter("Id");
-		String productCount=request.getParameter("qty");
-		System.out.println(productCount);
+		
+		
 		boolean isNewProductId = RepeatedProductsValidator.isNewProductTocart(productId);
 		//validating whether the productId is new to the arraylist;
 		if (!isNewProductId) {

@@ -25,7 +25,7 @@ public class CartDaoImp implements CartDao {
 			con = ConnectionUtil.getConnection();
 			String inSql = String.join(",", Collections.nCopies(productIds.size(), "?"));
 			String sql = "select * from productInfo where ProductId IN ( " + inSql + ")";
-			System.out.println(sql);
+			
 			st = con.prepareStatement(sql);
 
 			for (int i = 1; i <= productIds.size(); i++) {
