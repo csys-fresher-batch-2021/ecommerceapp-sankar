@@ -8,3 +8,4 @@
 #### 5)Add Products Feature
 #### 6) Add Product to the cart feature
 #### 7) Remove Product from cart feature 
+#### 8) User Cart Items Price estimator feature
