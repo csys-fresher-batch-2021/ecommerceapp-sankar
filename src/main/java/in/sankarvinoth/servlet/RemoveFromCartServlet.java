@@ -41,7 +41,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 		List<Product> products = (List<Product>) session.getAttribute("productslist");
 		// method to delete the productId respected product object
 		boolean isRemoved = CartService.deleteProductFromCart(products, productId);
-
+        
 		if (isRemoved) {
 			String message = "Product Removed From cart successfully";
 			response.sendRedirect("Cart.jsp?infoMessage=" + message);

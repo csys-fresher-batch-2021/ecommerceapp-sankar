@@ -1,7 +1,5 @@
 <%@page import=" java.util.List"%>
 <%@page import="in.sankarvinoth.model.Product"%>
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -27,10 +25,7 @@
 		}
 		%>
 		<h3>User Cart</h3>
-
-
-
-		<table class="table table-bordered">
+		<table class="table table-bordered" id="table">
 			<caption>Products name along with its serial number</caption>
 			<thead>
 				<tr>
@@ -40,14 +35,15 @@
 					<th scope="col">Product category</th>
 					<th scope="col">Product Price(in Rs.)</th>
 					<th scope="col">Product quantity</th>
+					<th scope="col">Product Total</th>
 					<th scope="col">Service Status</th>
 					<th scope="col">Remove</th>
 				</tr>
 
 				<%
-				List<Product> products = (List<Product>) session.getAttribute("productslist");
+				List<Product> products = (List<Product>)session.getAttribute("productslist");
 				int i = 0;
-				int quantity = 1;
+				
 				%>
 
 
@@ -61,7 +57,6 @@
 						String productName = product.getProductName();
 						String category = product.getCategory();
 						int amount = product.getAmount();
-
 						String status = product.getStatus();
 				%>
 				<tr>
@@ -69,9 +64,11 @@
 					<td><%=productId%></td>
 					<td><%=productName%></td>
 					<td><%=category%></td>
-					<td><%=amount%></td>
-					<td><%=quantity%></td>
+					<td><input type="number"  id="amount_<%=productId%>"   readonly value="<%=amount%>" ></td>
+					<td><input type="number" id="quantity_<%=productId%>" onchange="productTotal('<%=productId %>')" min="1" max="100"></td>
+					<td><input type="number" id="producttotal_<%=productId %>" readonly ></td>
 					<td><%=status%></td>
+					
 					<td><a href="RemoveFromCartServlet?Id=<%=productId%>">remove</a></td>
 
 
@@ -85,14 +82,51 @@
 
 			</thead>
 		</table>
-
-
+		
+	
 	</main>
+	
+	Total Price(in Rs.) :<input type="number" name="TotalAmount" id="total" readonly >
+	Total Price With  10 % Gst(in Rs.):<input type="number" name="TotalAmountwithgst" id="totalwithgst" readonly >
+	<button type="submit" class="btn btn-warning">Confirm Order</button>
+	<script>
+	function productTotal(productId) {
+		var price=document.getElementById("amount_" + productId).value;
+		var qty=document.getElementById("quantity_"+ productId).value;
+		let amount = price*qty;
+		document.getElementById("producttotal_"+ productId).value=amount;
+		
+		
+		let obj = { productId: productId, qty: qty , amount : amount};
+		let cartItemStr = localStorage.getItem("CART_ITEMS");
+		let items = cartItemStr != null ? JSON.parse(cartItemStr) : [];
+		
+		//if productId already exists, remove old record by index.
+		let index = items.findIndex(obj=> obj.productId=== productId);
+		if(index != -1){
+			items.splice(index,1);
+		}
+		
+		items.push(obj);
+		localStorage.setItem("CART_ITEMS", JSON.stringify(items));
+		let total = 0;
+		for(let item of items){
+			total+= item.amount;
+		}
+		document.getElementById("total").value=total;
+		let amountWithGst=((total*10)/100)+total;
+		document.getElementById("totalwithgst").value=amountWithGst;
+	}
+	
+	function emptyCart(){
+		localStorage.removeItem("CART_ITEMS");
+	}
+	
+	emptyCart();
+
+	</script>
+	
+	
 
 </body>
 </html>
-
-
-
-
-
