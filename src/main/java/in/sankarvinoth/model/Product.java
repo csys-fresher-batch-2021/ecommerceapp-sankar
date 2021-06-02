@@ -3,10 +3,6 @@ package in.sankarvinoth.model;
 public class Product {
 private int quantity;
 
-
-
-
-
 public int getQuantity() {
 	return quantity;
 }

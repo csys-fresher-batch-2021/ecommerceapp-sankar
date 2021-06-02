@@ -1,7 +1,7 @@
 package in.sankarvinoth.dao;
 
 import java.sql.Connection;
-
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,14 +13,12 @@ import in.sankarvinoth.util.connection.ConnectionUtil;
 
 public class ProductsDaoImp implements ProductsDao {
 
-	
-     // method to get list tye products available in the store 
+	// method to get list tye products available in the store
 	public List<Product> getAllProducts() {
 		List<Product> products = new ArrayList<>();
 		Connection con = null;
 		Statement st = null;
 		ResultSet rst = null;
-		       
 
 		try {
 			// getting the connection
@@ -31,8 +29,8 @@ public class ProductsDaoImp implements ProductsDao {
 			while (rst.next()) {
 
 				String productName = rst.getString("ProductName");
-				String productId=rst.getString("ProductId");
-				String category=rst.getString("Category");
+				String productId = rst.getString("ProductId");
+				String category = rst.getString("Category");
 				int price = rst.getInt("Price");
 				int quantity = rst.getInt("quantity");
 				String status = rst.getString("Status");
@@ -51,8 +49,8 @@ public class ProductsDaoImp implements ProductsDao {
 			e.printStackTrace();
 		} finally {
 			// closing the connection
-			ConnectionUtil.close(con,st,rst);
-			
+			ConnectionUtil.close(con, st, rst);
+
 		}
 
 		return products;
@@ -61,7 +59,8 @@ public class ProductsDaoImp implements ProductsDao {
 
 	@Override
 	/**
-	 *  method to get the list of products that is in the database which matches with the search
+	 * method to get the list of products that is in the database which matches with
+	 * the search
 	 */
 	public List<Product> searchForProduct(String searchedProduct) {
 		List<Product> searchProducts = new ArrayList<>();
@@ -74,13 +73,14 @@ public class ProductsDaoImp implements ProductsDao {
 			con = ConnectionUtil.getConnection();
 
 			st = con.createStatement();
-			String sql="select * from productInfo where ProductName ~* '"+searchedProduct+"'  or Category ~* '"+searchedProduct+"'";
+			String sql = "select * from productInfo where ProductName ~* '" + searchedProduct + "'  or Category ~* '"
+					+ searchedProduct + "'";
 			rst = st.executeQuery(sql);
 			while (rst.next()) {
 
 				String productName = rst.getString("ProductName");
-				String productId=rst.getString("ProductId");
-				String category=rst.getString("Category");
+				String productId = rst.getString("ProductId");
+				String category = rst.getString("Category");
 				int price = rst.getInt("Price");
 				int quantity = rst.getInt("quantity");
 				String status = rst.getString("Status");
@@ -99,20 +99,98 @@ public class ProductsDaoImp implements ProductsDao {
 			e.printStackTrace();
 		} finally {
 			// closing the connection
-			ConnectionUtil.close(con,st,rst);
-			
+			ConnectionUtil.close(con, st, rst);
+
 		}
 		return searchProducts;
 
-		
-
-	}
-	
-	
-	
-
-
-		
 	}
 
+	@Override
+	/**
+	 * method to get the list of products that is in the database which matches with
+	 * the search
+	 */
+	public List<Product> searchProductByProductId(String productId) {
+		List<Product> products = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rst = null;
 
+		try {
+			// getting the connection
+			con = ConnectionUtil.getConnection();
+			String sql = "select * from productInfo where ProductId = '" + productId + "'";
+			st = con.prepareStatement(sql);
+
+			rst = st.executeQuery();
+			while (rst.next()) {
+
+				String productName = rst.getString("ProductName");
+
+				String category = rst.getString("Category");
+				int price = rst.getInt("Price");
+				int quantity = rst.getInt("quantity");
+				String status = rst.getString("Status");
+				Product product = new Product();
+				product.setProductName(productName);
+				product.setProductId(productId);
+				product.setCategory(category);
+				product.setAmount(price);
+				product.setQuantity(quantity);
+				product.setStatus(status);
+				// getting the values in ArrayList
+				products.add(product);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// closing the connection
+			ConnectionUtil.close(con, st, rst);
+
+		}
+		return products;
+
+	}
+
+	@Override
+	/**
+	 * method to update the data depends upon the changes in the corresponding
+	 * fields
+	 */
+	public List<Product> updateStock(Product product) {
+		List<Product> products = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rst = null;
+
+		try {
+
+			String productId = product.getProductId();
+			String productName = product.getProductName();
+			String productCategory = product.getCategory();
+			int amount = product.getAmount();
+			int quantity = product.getQuantity();
+			String status = product.getStatus();
+			// getting the connection
+			con = ConnectionUtil.getConnection();
+			String sql = "update productInfo set productName='" + productName + "',Category='" + productCategory
+					+ "',Price='" + amount + "',quantity='" + quantity + "',Status='" + status + "' where productId='"
+					+ productId + "'";
+			st = con.prepareStatement(sql);
+
+			rst = st.executeQuery();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// closing the connection
+			ConnectionUtil.close(con, st, rst);
+
+		}
+		return products;
+
+	}
+
+}
