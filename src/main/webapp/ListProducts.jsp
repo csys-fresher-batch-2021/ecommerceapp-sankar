@@ -42,13 +42,14 @@
 					<th scope="col">Product Name</th>
 					<th scope="col">Product category</th>
 					<th scope ="col">Product Price(in Rs.)</th>
-					<th scope ="col">Product quantity</th>
+					<th scope ="col">Product quantities available</th>
 					<th scope ="col">Service Status</th>
 					<th scope ="col">Order Here</th>
 					</tr>
 				 
 					<% List<Product> products=ProductService.getAllProductsfromDb();
 					 int  i=0;
+		    		  int quantityneeded=1;
 		    		 
 		    		  %>
 		    		  
@@ -62,6 +63,7 @@
 						String productName=product.getProductName();
 						String category=product.getCategory();
 						int amount=product.getAmount();
+						int quantity=product.getQuantity();
 						
 						String status=product.getStatus();
 						%>
@@ -69,11 +71,13 @@
 			     <td><%=i%></td>
 			     <td><%=productId%></td>
 			      <td><%=productName%></td>
+			     
 			      <td><%=category%></td>
 			      <td><%=amount%></td>
-			     
+			       <td><%=quantity%></td>
+			      
 			       <td><%=status%></td>
-			   
+			       
 			        <td><a href="AddToCartServlet?Id=<%=productId%>">Add to Cart</a></td>
 			        </tr>
 				 <% }
@@ -84,7 +88,7 @@
 			</thead>
 				</table>
 				
-				<a href="Cart.jsp"><input type="button" value="View Cart"></a>
+				<a href="Cart.jsp"><input type="button"  class="btn btn-primary" value="View Cart"></a>
 	</main>
 
 </body>
