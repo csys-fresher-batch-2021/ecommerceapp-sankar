@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 import in.sankarvinoth.model.User;
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
@@ -156,5 +158,37 @@ public class UserDao {
 		return users;
 
 	}
+	
+	
+	/**
+	 * method to update the data depends upon the changes in the corresponding
+	 * fields
+	 */
+	public static void updateUserAddress(String address,String username) {
+		
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rst = null;
+
+		try {
+			// getting the connection
+			con = ConnectionUtil.getConnection();
+			String sql = "update UserRegister set address='" +address+ "' where userName='"
+					+username+ "'";
+			st = con.prepareStatement(sql);
+
+			rst = st.executeQuery();
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// closing the connection
+			ConnectionUtil.close(con, st, rst);
+
+		}
+		
+
+	}
+
 
 }
