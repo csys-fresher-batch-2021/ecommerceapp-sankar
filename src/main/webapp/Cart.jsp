@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<% String username=(String)session.getAttribute("Logged_in_User"); %>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <meta charset="ISO-8859-1">
 <title>E-CommerceApp</title>
 </head>
@@ -25,6 +28,8 @@
 		}
 		%>
 		<h3>User Cart</h3>
+		<input type="hidden" id="username" value="<%=username%>">
+		
 		<table class="table table-bordered" id="table">
 			<caption>Products name along with its serial number</caption>
 			<thead>
@@ -88,28 +93,25 @@
 	
 	Total Price(in Rs.) :<input type="number" name="TotalAmount" id="total" readonly >
 	Total Price With  10 % Gst(in Rs.):<input type="number" name="TotalAmountwithgst" id="totalwithgst" readonly >
-	<button type="submit" class="btn btn-warning">Confirm Order</button>
+	<button type="button" class="btn btn-warning" onclick="placeOrder()">Confirm Order</button>
 	<script>
 	function productTotal(productId) {
+		let total = 0;
 		var price=document.getElementById("amount_" + productId).value;
 		var qty=document.getElementById("quantity_"+ productId).value;
 		let amount = price*qty;
 		document.getElementById("producttotal_"+ productId).value=amount;
-		
-		
-		let obj = { productId: productId, qty: qty , amount : amount};
+		let obj = {productId: productId, qty: qty , amount : amount,totalCartAmount:totalwithgst,userId:username,totalAmountWithOutGST:total};
 		let cartItemStr = localStorage.getItem("CART_ITEMS");
 		let items = cartItemStr != null ? JSON.parse(cartItemStr) : [];
-		
 		//if productId already exists, remove old record by index.
 		let index = items.findIndex(obj=> obj.productId=== productId);
 		if(index != -1){
 			items.splice(index,1);
 		}
-		
 		items.push(obj);
 		localStorage.setItem("CART_ITEMS", JSON.stringify(items));
-		let total = 0;
+		
 		for(let item of items){
 			total+= item.amount;
 		}
@@ -121,8 +123,23 @@
 	function emptyCart(){
 		localStorage.removeItem("CART_ITEMS");
 	}
-	
 	emptyCart();
+	
+	function placeOrder() {
+		//let userName= (String)session.getAttribute("Logged_in_User");
+		let totalAmount=document.getElementById("total").value;
+		let totalCartAmount=document.getElementById("totalwithgst").value;
+		let username=document.getElementById("username").value;
+		let url="http://localhost:9000/AddOrderServlet";
+		let cartItemStr = localStorage.getItem("CART_ITEMS");
+		let items = cartItemStr != null ? JSON.parse(cartItemStr) : [];
+		
+		let data={userId:username,items:items,totalAmount:totalCartAmount,totalAmounts:totalAmount};
+		axios.post(url,data).then(res=> {
+			console.log(res);
+			alert("order placed successfully");
+		});
+	}
 
 	</script>
 	
