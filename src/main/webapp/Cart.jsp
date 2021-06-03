@@ -97,8 +97,9 @@
 	<script>
 	function productTotal(productId) {
 		let total = 0;
-		var price=document.getElementById("amount_" + productId).value;
-		var qty=document.getElementById("quantity_"+ productId).value;
+		
+		let price=document.getElementById("amount_" + productId).value;
+		let qty=document.getElementById("quantity_"+ productId).value;
 		let amount = price*qty;
 		document.getElementById("producttotal_"+ productId).value=amount;
 		let obj = {productId: productId, qty: qty , amount : amount,totalCartAmount:totalwithgst,userId:username,totalAmountWithOutGST:total};
@@ -127,14 +128,14 @@
 	
 	function placeOrder() {
 		//let userName= (String)session.getAttribute("Logged_in_User");
-		let totalAmount=document.getElementById("total").value;
+		let totalAmounts=document.getElementById("total").value;
 		let totalCartAmount=document.getElementById("totalwithgst").value;
 		let username=document.getElementById("username").value;
 		let url="http://localhost:9000/AddOrderServlet";
 		let cartItemStr = localStorage.getItem("CART_ITEMS");
 		let items = cartItemStr != null ? JSON.parse(cartItemStr) : [];
 		
-		let data={userId:username,items:items,totalAmount:totalCartAmount,totalAmounts:totalAmount};
+		let data={userId:username,items:items,totalAmount:totalCartAmount,totalAmountWithOutGST:totalAmounts};
 		axios.post(url,data).then(res=> {
 			console.log(res);
 			alert("order placed successfully");
