@@ -37,6 +37,8 @@ public class Registrationservlet extends HttpServlet {
 		Long  mobileNumber= Long.parseLong(request.getParameter("mobilenumber"));
 		String password= request.getParameter("password");
 		String confirmPassword= request.getParameter("confirmPassword");
+		String securityQuestion=request.getParameter("securityQuestions");
+		String securityAnswer=request.getParameter("securityanswer");
 		// validating the form values
 		boolean isvalidUserInputs=UserInputsValidator.usersInputValidator(fullName,username,email,mobileNumber);
 		
@@ -47,6 +49,8 @@ public class Registrationservlet extends HttpServlet {
 			 user.setEmail(email);
 			 user.setPhoneNumber(mobileNumber);
 			 user.setPassword(password);
+			 user.setSecurityQuestion(securityQuestion);
+			 user.setSecurityAnswer(securityAnswer);
 			 boolean isValidRegistration;
 			 try {
 				isValidRegistration = UserRegistrationservice.userregistrationService(user);

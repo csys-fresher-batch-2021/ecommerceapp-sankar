@@ -40,6 +40,16 @@
 			Password</label> <input type="password" name="confirmPassword"
 			placeholder="retype password" pattern="^[A-Za-z0-9]{5,8}$"
 			title="password should be in given format" required><br />
+			Security Question:<select name="securityQuestions">
+  <option value="What was the name of your first manager at your first job?">What was the name of your first manager at your first job?</option>
+  <option value="What was your favorite subject in high school?">What was your favorite subject in high school?</option>
+  <option value="What is your employee ID number?">What is your employee ID number?</option>
+  <option value="Where did you go on your favorite vacation as a child?">Where did you go on your favorite vacation as a child?</option>
+  <option value="What is the name of the road you grew up on?">What is the name of the road you grew up on?</option>
+</select><br/>
+<label>SecurityAnswer</label> <input type="text" name="securityanswer"
+			placeholder="Enter Security Answer " 
+			  required><br />
 		<button class="btn btn-primary">Register</button>
 		<button class="btn btn-danger" type="reset">Reset</button>
 		<h5>
