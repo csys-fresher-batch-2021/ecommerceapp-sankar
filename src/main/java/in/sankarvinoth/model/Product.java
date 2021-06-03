@@ -17,8 +17,6 @@ public void setProductId(String productId) {
 }
 
 private String productId;
-
-
 private String productName;
 private int amount;
 private String category;
