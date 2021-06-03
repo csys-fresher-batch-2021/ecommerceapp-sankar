@@ -10,3 +10,4 @@
 #### 7) Remove Product from cart feature. 
 #### 8) User Cart Items Price estimator feature.
 #### 9) Edit Products details feature.
+#### 10) Order Placement feature
