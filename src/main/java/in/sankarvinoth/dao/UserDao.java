@@ -28,19 +28,23 @@ public class UserDao {
 		String email = user.getEmail();
 		Long mobileNumber = user.getPhoneNumber();
 		String password = user.getPassword();
+		String securityQuestion = user.getSecurityQuestion();
+		String securityAnswer = user.getSecurityAnswer();
 		// getting the connection
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pst = null;
 
 		try {
 
-			String sql = "insert into UserRegister (fullName,userName,email,mobileNumber,password) values(?,?,?,?,?)";
+			String sql = "insert into UserRegister(fullName,userName,email,mobileNumber,password,SecurityQuestion,SecurityAnswer) values(?,?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, fullName);
 			pst.setString(2, userName);
 			pst.setString(3, email);
 			pst.setLong(4, mobileNumber);
 			pst.setString(5, password);
+			pst.setString(6, securityQuestion);
+			pst.setString(7, securityAnswer);
 			// executing query
 			pst.executeUpdate();
 
@@ -154,6 +158,59 @@ public class UserDao {
 
 		}
 		return users;
+
+	}
+
+	/**
+	 * method to check and update password , if the user credentials already exists
+	 * 
+	 * @param user
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+
+	public static boolean passwordUpdate(User user) throws ClassNotFoundException, SQLException {
+		boolean isExists = false;
+		Long mobileNumber = user.getPhoneNumber();
+		String securityQuestion = user.getSecurityQuestion();
+		String securityAnswer = user.getSecurityAnswer();
+		String newPassword = user.getPassword();
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rst = null;
+
+		try {
+
+			// getting the connection
+			con = ConnectionUtil.getConnection();
+			String sql = ("select mobileNumber from UserRegister where mobileNumber='" + mobileNumber + "'");
+
+			st = con.prepareStatement(sql);
+
+			rst = st.executeQuery();
+			while (rst.next()) {
+
+				String sql1 = ("update UserRegister set password=? where mobileNumber=? and SecurityQuestion=? and SecurityAnswer=?");
+				st = con.prepareStatement(sql1);
+				st.setString(1, newPassword);
+				st.setLong(2, mobileNumber);
+				st.setString(3, securityQuestion);
+				st.setString(4, securityAnswer);
+
+				st.executeUpdate();
+				isExists = true;
+
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// closing the connection
+			ConnectionUtil.close(con, st, rst);
+
+		}
+		return isExists;
 
 	}
 

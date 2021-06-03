@@ -32,6 +32,7 @@
 <button class="btn btn-danger" type="reset">cancel</button>
 
 <p>Don't have an account ?<a href="register.jsp">  Register</a></p> 
+<a href="ForgotPassword.jsp">Forgot password ?</a> 
 </form>
 
 </body>
