@@ -5,6 +5,7 @@ import java.util.List;
 
 import in.sankarvinoth.dao.CartDao;
 import in.sankarvinoth.dao.CartDaoImp;
+import in.sankarvinoth.model.Cart;
 import in.sankarvinoth.model.Product;
 
 public class CartService {
@@ -67,6 +68,12 @@ public class CartService {
 		
 	}
 	 
+	public static List<Cart> getAllOrderedItemsService(String userName) {
+		 return cart.getAllPlacedOrders(userName);
+	}
+	
+
+	
 	
 
 }
