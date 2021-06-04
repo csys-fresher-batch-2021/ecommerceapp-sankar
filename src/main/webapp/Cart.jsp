@@ -139,6 +139,7 @@
 		axios.post(url,data).then(res=> {
 			console.log(res);
 			alert("order placed successfully");
+			window.location = "DisplayOrderedItems.jsp";
 		});
 	}
 
