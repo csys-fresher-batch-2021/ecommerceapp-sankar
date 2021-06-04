@@ -69,9 +69,9 @@
 					<td><%=productId%></td>
 					<td><%=productName%></td>
 					<td><%=category%></td>
-					<td><input type="number"  id="amount_<%=productId%>"   readonly value="<%=amount%>" ></td>
-					<td><input type="number" id="quantity_<%=productId%>" onchange="productTotal('<%=productId %>')" min="1" max="100"></td>
-					<td><input type="number" id="producttotal_<%=productId %>" readonly ></td>
+					<td><input type="number"  id="amount_<%=productName%>"   readonly value="<%=amount%>" ></td>
+					<td><input type="number" id="quantity_<%=productName%>" onchange="productTotal('<%=productName%>')" min="1" max="100"></td>
+					<td><input type="number" id="producttotal_<%=productName%>" readonly ></td>
 					<td><%=status%></td>
 					
 					<td><a href="RemoveFromCartServlet?Id=<%=productId%>">remove</a></td>
@@ -95,18 +95,18 @@
 	Total Price With  10 % Gst(in Rs.):<input type="number" name="TotalAmountwithgst" id="totalwithgst" readonly >
 	<button type="button" class="btn btn-warning" onclick="placeOrder()">Confirm Order</button>
 	<script>
-	function productTotal(productId) {
+	function productTotal(productName) {
 		let total = 0;
 		
-		let price=document.getElementById("amount_" + productId).value;
-		let qty=document.getElementById("quantity_"+ productId).value;
+		let price=document.getElementById("amount_" +productName).value;
+		let qty=document.getElementById("quantity_"+productName).value;
 		let amount = price*qty;
-		document.getElementById("producttotal_"+ productId).value=amount;
-		let obj = {productId: productId, qty: qty , amount : amount,totalCartAmount:totalwithgst,userId:username,totalAmountWithOutGST:total};
+		document.getElementById("producttotal_"+productName).value=amount;
+		let obj = {productName:productName, qty: qty , amount : amount,totalCartAmount:totalwithgst,userId:username,totalAmountWithOutGST:total};
 		let cartItemStr = localStorage.getItem("CART_ITEMS");
 		let items = cartItemStr != null ? JSON.parse(cartItemStr) : [];
 		//if productId already exists, remove old record by index.
-		let index = items.findIndex(obj=> obj.productId=== productId);
+		let index = items.findIndex(obj=> obj.productName=== productName);
 		if(index != -1){
 			items.splice(index,1);
 		}
