@@ -11,6 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>E-CommerceApp</title>
 </head>
+<% String User=(String)session.getAttribute("Logged_in_User"); %>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
@@ -30,7 +31,9 @@
 					<th scope ="col">Product Price(in Rs.)</th>
 					<th scope ="col">Product quantity</th>
 					<th scope ="col">Service Status</th>
+					 <% if((User!=null)) { %>
 					<th scope ="col">Order Here</th>
+					   <%  } %>
 					</tr>
 				 
 					<% List<Product> products=ProductService.getSearchResults(searchedProduct);
@@ -58,10 +61,13 @@
 			      <td><%=amount%></td>
 			      <td><%=quantity%></td>
 			       <td><%=status%></td>
+			        <% if((User!=null)) { %>
 			        <td><a href="AddToCartServlet?Id=<%=productId%>">Add to Cart</a></td>
+			         <%  } %>
 			        </tr>
-				 <% }
-					} %>
+				 <% 
+					}
+			        }%>
 				
 				 
 				 

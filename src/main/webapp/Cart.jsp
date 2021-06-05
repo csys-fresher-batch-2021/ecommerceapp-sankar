@@ -70,7 +70,7 @@
 					<td><%=productName%></td>
 					<td><%=category%></td>
 					<td><input type="number"  id="amount_<%=productName%>"   readonly value="<%=amount%>" ></td>
-					<td><input type="number" id="quantity_<%=productName%>" onchange="productTotal('<%=productName%>')" min="1" max="100"></td>
+					<td><input type="number" id="quantity_<%=productName%>" onchange="productTotal('<%=productName%>','<%=productId%>')" min="1" max="100"></td>
 					<td><input type="number" id="producttotal_<%=productName%>" readonly ></td>
 					<td><%=status%></td>
 					
@@ -87,7 +87,7 @@
 
 			</thead>
 		</table>
-		
+		<a href="EmptyCartServlet">Empty cart</a>
 	
 	</main>
 	
@@ -95,7 +95,7 @@
 	Total Price With  10 % Gst(in Rs.):<input type="number" name="TotalAmountwithgst" id="totalwithgst" readonly >
 	<button type="button" class="btn btn-warning" onclick="placeOrder()">Confirm Order</button>
 	<script>
-	function productTotal(productName) {
+	function productTotal(productName,productId) {
 		let total = 0;
 		
 		let price=document.getElementById("amount_" +productName).value;

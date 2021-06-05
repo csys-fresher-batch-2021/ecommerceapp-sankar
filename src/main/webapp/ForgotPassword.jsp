@@ -9,11 +9,12 @@
 <title>E-CommerceApp</title>
 </head>
 <body>
+   <h3>Password Reset</h3>
 	<form action="ForgotPasswordServlet" method="post">
-
+      
 		<label>MobileNumber</label> <input type="number" name="mobilenumber"
 			placeholder="Enter phone.no" pattern="^[6-9][0-9]{9}$ "
-			title="phonenumber should be in given format" required><br />
+			title="phonenumber should be in valid format" required><br />
 		your Security Question:<select name="securityQuestions">
 			<option
 				value="What was the name of your first manager at your first job?">What
@@ -27,8 +28,9 @@
 				did you go on your favorite vacation as a child?</option>
 			<option value="What is the name of the road you grew up on?">What
 				is the name of the road you grew up on?</option>
-		</select><br /> <label> your SecurityAnswer:</label> <input type="text"
-			name="securityanswer" placeholder="Enter Security Answer " required><br />
+		</select><br /> 
+		<label> your SecurityAnswer:</label> <input type="text"
+			name="securityanswer" placeholder="Enter Security Answer "   title ="Should be valid" required><br />
 		<label> New Password</label> <input type="password" name="password"
 			placeholder="Enter New password" pattern="^[A-Za-z0-9]{5,8}$"
 			title="password should be in given format" required><br /> <label>Confirm
@@ -40,6 +42,10 @@
 		<a href="LoginPage.jsp">Login</a>
 
 	</form>
+	<ul>
+	<li>Password :should have alphabets and numbers only minimum and maximum length of password should be (5-8)</li>
+	<li>ConfirmPassword :should have alphabets and numbers only minimum and maximum length of password should be (5-8)</li>
+	</ul>
 
 </body>
 </html>

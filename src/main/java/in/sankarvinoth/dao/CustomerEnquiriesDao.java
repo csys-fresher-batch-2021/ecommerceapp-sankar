@@ -1,10 +1,12 @@
 package in.sankarvinoth.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -64,8 +66,7 @@ public class CustomerEnquiriesDao {
 		Connection con = null;
 		Statement st = null;
 		ResultSet rst = null;
-		LocalDate date=LocalDate.now();
-		LocalTime time=LocalTime.now();
+		
 
 		try {
 			// getting the connection
@@ -81,13 +82,16 @@ public class CustomerEnquiriesDao {
 				
 				String sentTo = rst.getString("sendTo");
 				
+				 Date date1=rst.getDate("messageSentDate");
+				 Time time1=rst.getTime("messageSenttime");
+				
 				Customer customer = new Customer();
 				customer.setUserName(userName);
 				customer.setSubject(subject);
 				customer.setMessage(message);
 				customer.setSendTo(sentTo);
-				customer.setDate(date);
-				customer.setTime(time);
+				customer.setDate(date1.toLocalDate());
+				customer.setTime(time1.toLocalTime());
 				
 				
 				

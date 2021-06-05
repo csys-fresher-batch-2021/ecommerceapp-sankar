@@ -55,7 +55,7 @@ public class AddProductsServlet extends HttpServlet {
 		try {
 			if (AddProductsService.addProductService(product)) {
 				String message = "Product added Successfully";
-				response.sendRedirect("AddProducts.jsp?infoMessage=" + message);
+				response.sendRedirect("ListProducts.jsp?infoMessage=" + message);
 			} else {
 				String message = "Product already exists";
 				response.sendRedirect("AddProducts.jsp?errorMessage=" + message);

@@ -24,11 +24,16 @@ public class CartService {
 	 * @param productId
 	 * @return
 	 */
-	public static List<String> getAllProductIds(String productId) {
-		// getting the values in ArrayList
-		productIds.add(productId);
+	public static List<String> getAllProductIds() {
 		return productIds;
 	}
+	public static List<String> setAllProductIds(String productId) {
+       productIds.add(productId);
+	return productIds;
+	}
+	
+	
+	
 
 	/**
 	 * method to add products to cart gives the corresponding values inEqual of
@@ -40,7 +45,7 @@ public class CartService {
 	public static List<Product> addProductToCartService(List<String> productIds) {
 
 		List<Product> productsInTheCart = cart.getAllProducts(productIds);
-		return productsInTheCart;
+	    return productsInTheCart;
 
 	}
 	
@@ -50,9 +55,10 @@ public class CartService {
 	 * @param productId
 	 * @return
 	 */
-	public static boolean deleteProductFromCart(List<Product> products,String productId) {
+	public static boolean deleteProductFromCart(List<Product> products,String productId,List<String> productIds) {
 		boolean isDeleted=false;
 		Product isExists = null;
+		
 		for(Product product:products ) {
 			if(product.getProductId().equalsIgnoreCase(productId)) {
 				isExists= product;
@@ -61,10 +67,13 @@ public class CartService {
 		}
 		if(isExists!= null) {
 			products.remove(isExists);
+			productIds.remove(productId);
 			isDeleted=true;
 			
 		}
-		return isDeleted ;
+		return isDeleted;
+		
+		
 		
 	}
 	 
@@ -73,7 +82,5 @@ public class CartService {
 	}
 	
 
-	
-	
-
 }
+

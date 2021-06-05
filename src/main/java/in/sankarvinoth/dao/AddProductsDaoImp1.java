@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.util.connection.ConnectionUtil;
@@ -24,9 +25,10 @@ public class AddProductsDaoImp1 implements AddProductsDao {
 		int price = product.getAmount();
 		String status = product.getStatus();
 		// getting the connection
-		Connection con = ConnectionUtil.getConnection();
+		Connection con =    null;
 		PreparedStatement pst = null;
 		try {
+			 con =ConnectionUtil.getConnection();
 			String sql = "insert into productInfo(ProductId,ProductName,Category,Price,quantity,Status) values(?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, productId);
@@ -52,25 +54,36 @@ public class AddProductsDaoImp1 implements AddProductsDao {
 	 * method to search the product Id and Product category of given product exists
 	 * in the database .
 	 */
-	public boolean findProductByProductId(Product product) throws ClassNotFoundException, SQLException {
+	public List<Product> findProductByProductId(Product product) throws ClassNotFoundException, SQLException {
 		String productId = product.getProductId();
-		String category = product.getCategory();
-		boolean status = false;
+		String productName = product.getProductName();
+		List<Product> productsInTheStock = new ArrayList<>();
+		
 
 // getting the  Connection
 		Connection con = null;
 		
 		ResultSet rs = null;
-		Statement st=null;
+		PreparedStatement st=null;
 		try {
 			con = ConnectionUtil.getConnection();
 			// query for search operation
-			String sql = ("select * from productInfo where ProductId='" + productId + "' and Category='" + category
-					+ "' ");
-			 st = con.createStatement();
+			String sql = ("select * from productInfo where ProductId =? and ProductName =? ");
+			 st = con.prepareStatement(sql);
+			 st.setString(1,productId);
+			 st.setString(2,productName);
 			// Execute Query
-			rs = st.executeQuery(sql);
-			status = rs.next();
+			rs = st.executeQuery();
+			while( rs.next()) {
+				
+				
+				Product product1 = new Product();
+				product1.setProductName(productName);
+				product1.setProductId(productId);
+				
+				// getting the values in ArrayList
+				productsInTheStock.add(product1);
+			}
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.getMessage();
@@ -82,7 +95,8 @@ public class AddProductsDaoImp1 implements AddProductsDao {
 			
 
 		}
-		return status;
+		return productsInTheStock;
+		
 	}
 
 }

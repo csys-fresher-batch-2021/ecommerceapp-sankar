@@ -28,15 +28,16 @@
 			title="fullname should be in given format" autofocus required><br />
 		<label>UserName</label> <input type="text" name="username"
 			placeholder="Enter username" pattern="^[A-Za-z][A-Za-z0-9]{5,12}$"
-			title="username should be in given format" required><br /> <label>MobileNumber</label>
+			title="username should be in valid format" required><br /> <label>MobileNumber</label>
 		<input type="number" name="mobilenumber" placeholder="Enter phone.no"
 			pattern="^[6-9][0-9]{9}$ "
-			title="phonenumber should be in given format" required><br />
+			title="phonenumber should be in valid format" required><br />
 		<label>E-mail</label> <input type="email" name="email"
-			placeholder="Enter your email" required><br /> <label>Password</label>
+			placeholder="Enter your email" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" title="INvalid email format" required><br /> <label>Password</label>
 		<input type="password" name="password" placeholder="Enter password"
 			pattern="^[A-Za-z0-9]{5,8}$"
-			title="password should be in given format" required><br /> <label>Confirm
+			title="password should be in given format" required><br /> 
+			<label>Confirm
 			Password</label> <input type="password" name="confirmPassword"
 			placeholder="retype password" pattern="^[A-Za-z0-9]{5,8}$"
 			title="password should be in given format" required><br />
@@ -48,14 +49,21 @@
   <option value="What is the name of the road you grew up on?">What is the name of the road you grew up on?</option>
 </select><br/>
 <label>SecurityAnswer</label> <input type="text" name="securityanswer"
-			placeholder="Enter Security Answer " 
-			  required><br />
+			placeholder="Enter Security Answer "  title="should be valid one "
+			  required ><br />
 		<button class="btn btn-primary">Register</button>
 		<button class="btn btn-danger" type="reset">Reset</button>
 		<h5>
 			<a href="LoginPage.jsp">Login</a>
 		</h5>
 	</form>
+	<ul>
+	<li>fullName: should starts with caps , should not have any numeric values . minimum and maximum values for fullname(4-29)<li>
+	<li>Username:can have both numbers and alphabets (minimum and maximum length are(5-12))<li>
+	<li>Password :should have alphabets and numbers only minimum and maximum length of password should be (5-8) </li>
+	<li>ConfirmPassword :should have alphabets and numbers only minimum and maximum length of password should be (5-8)</li>
+	
+	</ul>
 
 
 </body>

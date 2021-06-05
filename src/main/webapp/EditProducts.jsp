@@ -12,6 +12,7 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 <body>
+<h3> Edit Products</h3>
 <form action="EditProductsServlet" method="post">
  <% String productId= request.getParameter("Id"); %>
 <% List<Product> productsDetails=EditProductService.getSearchResults(productId);
@@ -34,10 +35,10 @@ for(Product product:productsDetails){
 %>
 <h3>Edit Product </h3>
  ProductId:<input type="text" placeholder="Enter productId" name="id"  title ="ProductId field should not be empty" value="<%=productId%>" readonly required><br/>
- Product Name:<input type="text" placeholder="Enter productname" name="name"  title ="Productname field should not be empty" value="<%=productName%>" required><br/>
- product category:<input type="text" placeholder="Enter product category" name="category"   title ="ProductCategory field should not be empty " value="<%=category%>"  required><br/>
- productPrice:<input type="number" placeholder="Enter product price" name="price"  title ="Product price field should not be empty"  value="<%=amount%>" required><br/>
- product quantity:<input type="number" placeholder="Enter productQuantity" name="qty"  title ="ProductQuantity field should not be empty"  value="<%=quantity%>" required><br/>
+ Product Name:<input type="text" placeholder="Enter productname" name="name"    value="<%=productName%>" required><br/>
+ product category:<input type="text" placeholder="Enter product category"  pattern="^[A-Za-z]{4,20}$"  title="ProductCategory should be in alphabets" name="category"    value="<%=category%>"  required><br/>
+ productPrice:<input type="number" placeholder="Enter product price"  min="1" max="100000" name="price"  pattern="^[0-10000000]{7}$"  title="ProductPrice should be in numbers and not greater than 10 lakhs "    value="<%=amount%>" required><br/>
+ product quantity:<input type="number" placeholder="Enter productQuantity" name="qty"  min="1" max="500"  pattern="^[0-500]{4}$" title="ProductQuantity should be in numbers and not greater than 500 and not less than 1"  value="<%=quantity%>" required><br/>
    Product available status<select name="pro">
   <option value="available">available</option>
   <option value="not available">not available</option>

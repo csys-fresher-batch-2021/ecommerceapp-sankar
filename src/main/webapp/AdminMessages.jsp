@@ -60,13 +60,6 @@
 			      <td><%=receivedMessages%></td>
 			      <td><%=date%></td>
 			       <td><%=time%></td>
-			      
-			       
-			       
-			       
-			        	
-			       
-			       
 			        </tr>
 				 <% }
 					} %>

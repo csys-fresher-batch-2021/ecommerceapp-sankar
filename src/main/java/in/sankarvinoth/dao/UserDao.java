@@ -78,7 +78,7 @@ public class UserDao {
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = ("select * from UserRegister where mobileNumber='" + phoneNumber + "' and email='" + email
+			String sql = ("select * from UserRegister where mobileNumber='" + phoneNumber + "' or email='" + email
 					+ "' ");
 
 			st = con.prepareStatement(sql);
