@@ -11,7 +11,11 @@ public class ProductDetailsValidator {
 	private ProductDetailsValidator() {
 		
 	}
-
+/**
+ * method to validate all the user inputs for the data related to products
+ * @param product
+ * @return
+ */
 	public static boolean productValidator(Product product) {
 		boolean isvalidProductId=StringValidator.isValidString(product.getProductId()); 
 		boolean isValidProductName=StringValidator.isValidString(product.getProductName());

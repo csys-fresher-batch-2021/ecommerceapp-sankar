@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.service.EditProductService;
+import in.sankarvinoth.util.validator.ProductDetailsValidator;
 
 /**
  * Servlet implementation class EditProductsServlet
@@ -38,8 +39,16 @@ public class EditProductsServlet extends HttpServlet {
 		product.setAmount(price);
 		product.setQuantity(quantity);
 		product.setStatus(status);
+		 boolean isvalidProductDetails=ProductDetailsValidator.productValidator(product);
+		 if(isvalidProductDetails) {
 		EditProductService.updateProductsService(product);
+        String message="Updated Successfully";
+        response.sendRedirect("ListProducts.jsp?infoMessage="+message);
+	   } 
+		 else {
+			 String message="invalid Product Details";
+		        response.sendRedirect("EditProducts.jsp?errorMessage="+message);
+		 }
 
-	}
-
+}
 }

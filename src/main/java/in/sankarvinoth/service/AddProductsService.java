@@ -7,6 +7,7 @@ import in.sankarvinoth.dao.AddProductsDaoImp1;
 
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.util.validator.ProductDetailsValidator;
+import in.sankarvinoth.util.validator.ProductValidator;
 
 public class AddProductsService {
 	private AddProductsService() {
@@ -29,14 +30,15 @@ public class AddProductsService {
 		// validating product inputs
 		boolean isValidProductDetails = ProductDetailsValidator.productValidator(product);
 		// validating whether the product already exists or not in the database
-		boolean isValidNewProduct = dao.findProductByProductId(product);
+		 boolean isvalidNewProduct=ProductValidator.isNewProductToRegister(product);
 		if (isValidProductDetails) {
-			if (isValidNewProduct) {
-
-				isValid = false;
-			} else {
+			if(isvalidNewProduct)
+			 {
 				dao.save(product);
 				isValid = true;
+				
+			} else {
+				isValid = false;
 			}
 
 		}

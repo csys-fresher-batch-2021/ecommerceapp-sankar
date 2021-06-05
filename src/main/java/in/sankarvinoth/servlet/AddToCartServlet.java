@@ -16,6 +16,7 @@ import in.sankarvinoth.model.Product;
 import in.sankarvinoth.service.CartService;
 import in.sankarvinoth.util.validator.RepeatedProductsValidator;
 
+
 /**
  * Servlet implementation class AddToCartServlet
  */
@@ -27,21 +28,23 @@ public class AddToCartServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String productId = request.getParameter("Id");
 		
+	       CartService.setAllProductIds(productId);
+			List<String> productsavail=CartService.getAllProductIds();
+		    List<Product> products = CartService.addProductToCartService(productsavail);
+			
+			
 		
-		boolean isNewProductId = RepeatedProductsValidator.isNewProductTocart(productId);
-		//validating whether the productId is new to the arraylist;
-		if (!isNewProductId) {
-			List<String> productsIds = CartService.getAllProductIds(productId);
-			List<Product> products = CartService.addProductToCartService(productsIds);
 			HttpSession session = request.getSession();
 			// storing the list in the session
 			session.setAttribute("productslist", products);
+			if(RepeatedProductsValidator.isNewProductTocart(productId)) {
 			String message = "successfully added to cart";
 			response.sendRedirect("ListProducts.jsp?infoMessage=" + message);
-		} else {
-			String message = "Product already added to cart";
-			response.sendRedirect("ListProducts.jsp?errorMessage=" + message);
-		}
+			}
+			else {
+				String message = "Product already in the cart";
+				response.sendRedirect("ListProducts.jsp?errorMessage=" + message);
+			}
 
 	}
 

@@ -37,14 +37,16 @@ public class RemoveFromCartServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// getting Id from the view cart items page
 		String productId = request.getParameter("Id");
+		List<String> productIds=CartService.getAllProductIds();
 		HttpSession session = request.getSession();
 		List<Product> products = (List<Product>) session.getAttribute("productslist");
 		// method to delete the productId respected product object
-		boolean isRemoved = CartService.deleteProductFromCart(products, productId);
-        
+		boolean isRemoved = CartService.deleteProductFromCart(products, productId,productIds);
+		
 		if (isRemoved) {
 			String message = "Product Removed From cart successfully";
 			response.sendRedirect("Cart.jsp?infoMessage=" + message);
+			
 		} else {
 			String message = "nothing to remove in your cart";
 			response.sendRedirect("Cart.jsp?errorMessage=" + message);
