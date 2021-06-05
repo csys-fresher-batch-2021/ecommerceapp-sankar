@@ -18,7 +18,7 @@ import in.sankarvinoth.service.CustomerService;
 public class CustomerEnquiriesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-  
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String subject =request.getParameter("subject");
 		String message=request.getParameter("message");

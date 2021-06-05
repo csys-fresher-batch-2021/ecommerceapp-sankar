@@ -18,7 +18,7 @@ public class RepeatedProductsValidator {
         boolean isValid=false;
 		List<String> productsIdsInList = CartService.setAllProductIds(productId);
 		// contains method used to check the productId already exists or not
-		Set<String> s = new HashSet<String>();
+		Set<String> s = new HashSet<>();
 
         for(String productIds :productsIdsInList ) {
             if(s.add(productIds)) {

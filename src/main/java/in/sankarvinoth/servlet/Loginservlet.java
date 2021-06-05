@@ -19,8 +19,8 @@ import in.sankarvinoth.service.UserLoginService;
 @WebServlet("/Loginservlet")
 public class Loginservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      
+	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String userName = request.getParameter("username");
