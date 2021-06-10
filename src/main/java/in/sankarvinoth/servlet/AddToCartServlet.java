@@ -16,44 +16,34 @@ import in.sankarvinoth.model.Product;
 import in.sankarvinoth.service.CartService;
 import in.sankarvinoth.util.validator.RepeatedProductsValidator;
 
-
 /**
  * Servlet implementation class AddToCartServlet
  */
 @WebServlet("/AddToCartServlet")
 public class AddToCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   @Override
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// getting the productId from jsp
 		String productId = request.getParameter("Id");
-		
-	       CartService.setAllProductIds(productId);
-			List<String> productsavail=CartService.getAllProductIds();
-		    List<Product> products = CartService.addProductToCartService(productsavail);
-			
-			
-		
-			HttpSession session = request.getSession();
-			// storing the list in the session
-			session.setAttribute("productslist", products);
-			if(RepeatedProductsValidator.isNewProductTocart(productId)) {
+		// passing the productids to the the arrylist to store the productids
+		CartService.setAllProductIds(productId);
+		// getting all the products Ids from the arraylist
+		List<String> productsavailable = CartService.getAllProductIds();
+
+		List<Product> products = CartService.addProductToCartService(productsavailable);
+		HttpSession session = request.getSession();
+		// storing the list in the session
+		session.setAttribute("productslist", products);
+		if (RepeatedProductsValidator.isNewProductTocart(productId)) {
 			String message = "successfully added to cart";
 			response.sendRedirect("ListProducts.jsp?infoMessage=" + message);
-			}
-			else {
-				String message = "Product already in the cart";
-				response.sendRedirect("ListProducts.jsp?errorMessage=" + message);
-			}
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+		} else {
+			String message = "Product already in the cart";
+			response.sendRedirect("ListProducts.jsp?errorMessage=" + message);
+		}
 
 	}
 

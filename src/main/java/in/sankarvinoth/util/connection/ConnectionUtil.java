@@ -16,7 +16,7 @@ public class ConnectionUtil {
 	}
 
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
-
+         // database credentials
 		String driverClass = System.getenv("spring.datasource.driver-class-name");
 		String url = System.getenv("spring.datasource.url");
 		String username = System.getenv("spring.datasource.username");

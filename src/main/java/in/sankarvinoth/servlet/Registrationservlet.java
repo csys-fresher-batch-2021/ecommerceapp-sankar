@@ -31,7 +31,8 @@ public class Registrationservlet extends HttpServlet {
 
      @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String fullName= request.getParameter("fullname");
+		  // getting the form values
+    	 String fullName= request.getParameter("fullname");
 		String username= request.getParameter("username");
 		String email= request.getParameter("email");
 		Long  mobileNumber= Long.parseLong(request.getParameter("mobilenumber"));
@@ -41,7 +42,7 @@ public class Registrationservlet extends HttpServlet {
 		String securityAnswer=request.getParameter("securityanswer");
 		// validating the form values
 		boolean isvalidUserInputs=UserInputsValidator.usersInputValidator(fullName,username,email,mobileNumber);
-		
+		       // checking whether password and the confirm password same or not 
 		     if(password.equals(confirmPassword) && isvalidUserInputs ) {
 			 User user =new User();
 			 user.setFullName(fullName);
@@ -53,6 +54,7 @@ public class Registrationservlet extends HttpServlet {
 			 user.setSecurityAnswer(securityAnswer);
 			 boolean isValidRegistration;
 			 try {
+				  // checking whether the user already exists in the usertable or not 
 				isValidRegistration = UserRegistrationservice.userregistrationService(user);
 				if(isValidRegistration) {
 					 String message="Successfully Registered !!!!";
@@ -63,7 +65,7 @@ public class Registrationservlet extends HttpServlet {
 					 response.sendRedirect("register.jsp?errorMessage="+message);
 				 }
 			} catch (ClassNotFoundException | SQLException e) {
-				
+				e.getMessage();
 				e.printStackTrace();
 			}
 			 

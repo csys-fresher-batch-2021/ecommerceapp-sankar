@@ -23,12 +23,13 @@
 		<h3>User Registration</h3>
 
 		<label>FullName</label> <input type="text" name="fullname"
-			placeholder="Enter Fullname" pattern="^[A-Z][A-Za-z]{4,29}$"
-			title="Name should be in alphabets"
+			placeholder="Enter Fullname" pattern="^[A-Z][A-Za-z_ ]{4,29}$"
+			title="Name should be in alphabets and should start with Caps"
 			title="fullname should be in given format" autofocus required><br />
 		<label>UserName</label> <input type="text" name="username"
 			placeholder="Enter username" pattern="^[A-Za-z][A-Za-z0-9]{5,12}$"
-			title="username should be in valid format" required><br /> <label>MobileNumber</label>
+			title="username can contain alphabets and numerals" required><br /> 
+			<label>MobileNumber</label>
 		<input type="number" name="mobilenumber" placeholder="Enter phone.no"
 			pattern="^[6-9][0-9]{9}$ "
 			title="phonenumber should be in valid format" required><br />
@@ -36,11 +37,11 @@
 			placeholder="Enter your email" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" title="INvalid email format" required><br /> <label>Password</label>
 		<input type="password" name="password" placeholder="Enter password"
 			pattern="^[A-Za-z0-9]{5,8}$"
-			title="password should be in given format" required><br /> 
+			title="password can have both alphabets and digits" required><br /> 
 			<label>Confirm
 			Password</label> <input type="password" name="confirmPassword"
 			placeholder="retype password" pattern="^[A-Za-z0-9]{5,8}$"
-			title="password should be in given format" required><br />
+			title="password can have both alphabets and digits" required><br />
 			Security Question:<select name="securityQuestions">
   <option value="What was the name of your first manager at your first job?">What was the name of your first manager at your first job?</option>
   <option value="What was your favorite subject in high school?">What was your favorite subject in high school?</option>
@@ -57,13 +58,7 @@
 			<a href="LoginPage.jsp">Login</a>
 		</h5>
 	</form>
-	<ul>
-	<li>fullName: should starts with caps , should not have any numeric values . minimum and maximum values for fullname(4-29)<li>
-	<li>Username:can have both numbers and alphabets (minimum and maximum length are(5-12))<li>
-	<li>Password :should have alphabets and numbers only minimum and maximum length of password should be (5-8) </li>
-	<li>ConfirmPassword :should have alphabets and numbers only minimum and maximum length of password should be (5-8)</li>
 	
-	</ul>
 
 
 </body>

@@ -2,7 +2,13 @@ package in.sankarvinoth.model;
 
 public class Product {
 private int quantity;
-
+private int quantitiesSold;
+public int getQuantitiesSold() {
+	return quantitiesSold;
+}
+public void setQuantitiesSold(int quantitiesSold) {
+	this.quantitiesSold = quantitiesSold;
+}
 public int getQuantity() {
 	return quantity;
 }

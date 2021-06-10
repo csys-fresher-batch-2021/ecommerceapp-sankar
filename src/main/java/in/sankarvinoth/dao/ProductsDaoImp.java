@@ -13,22 +13,27 @@ import in.sankarvinoth.util.connection.ConnectionUtil;
 
 public class ProductsDaoImp implements ProductsDao {
 
-	// method to get list tye products available in the store
+	/** 
+	 * method to get all the products in the database
+	 */
 	public List<Product> getAllProducts() {
 		List<Product> products = new ArrayList<>();
 		Connection con = null;
-		Statement st = null;
+		PreparedStatement st = null;
 		ResultSet rst = null;
+		String productName = null;
 
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
 
-			st = con.createStatement();
-			rst = st.executeQuery("select * from productInfo");
+			String sql1 = "SELECT * FROM productinfo ORDER BY productname ";
+			st = con.prepareStatement(sql1);
+			rst = st.executeQuery();
+
 			while (rst.next()) {
 
-				String productName = rst.getString("ProductName");
+				productName = rst.getString("ProductName");
 				String productId = rst.getString("ProductId");
 				String category = rst.getString("Category");
 				int price = rst.getInt("Price");
@@ -41,6 +46,7 @@ public class ProductsDaoImp implements ProductsDao {
 				product.setAmount(price);
 				product.setQuantity(quantity);
 				product.setStatus(status);
+
 				// getting the values in ArrayList
 				products.add(product);
 			}
@@ -56,12 +62,13 @@ public class ProductsDaoImp implements ProductsDao {
 		return products;
 
 	}
-
-	@Override
+    
 	/**
 	 * method to get the list of products that is in the database which matches with
 	 * the search
 	 */
+	@Override
+	
 	public List<Product> searchForProduct(String searchedProduct) {
 		List<Product> searchProducts = new ArrayList<>();
 		Connection con = null;
@@ -190,6 +197,40 @@ public class ProductsDaoImp implements ProductsDao {
 
 		}
 		return products;
+
+	}
+
+	@Override
+	public void updateQuantity() {
+		List<Product> productsQuantity = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rst = null;
+
+		try {
+
+			// getting the connection
+			con = ConnectionUtil.getConnection();
+			String sql = "select productname,sum(quantity) from placedOrders group by productname";
+			st = con.prepareStatement(sql);
+
+			rst = st.executeQuery();
+			while (rst.next()) {
+				String productName = rst.getString("productname");
+				int productQunatity = rst.getInt("sum");
+				Product product = new Product();
+				product.setProductName(productName);
+				product.setQuantitiesSold(productQunatity);
+				productsQuantity.add(product);
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// closing the connection
+			ConnectionUtil.close(con, st, rst);
+
+		}
 
 	}
 

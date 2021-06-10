@@ -25,13 +25,14 @@ public class EditProductsServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// getting form values
+		// getting the form values
 		String productId = request.getParameter("id");
 		String productName = request.getParameter("name");
 		String category = request.getParameter("category");
 		String status = request.getParameter("pro");
 		int price = Integer.parseInt(request.getParameter("price"));
 		int quantity = Integer.parseInt(request.getParameter("qty"));
+
 		Product product = new Product();
 		product.setProductId(productId);
 		product.setProductName(productName);
@@ -39,16 +40,16 @@ public class EditProductsServlet extends HttpServlet {
 		product.setAmount(price);
 		product.setQuantity(quantity);
 		product.setStatus(status);
-		 boolean isvalidProductDetails=ProductDetailsValidator.productValidator(product);
-		 if(isvalidProductDetails) {
-		EditProductService.updateProductsService(product);
-        String message="Updated Successfully";
-        response.sendRedirect("ListProducts.jsp?infoMessage="+message);
-	   } 
-		 else {
-			 String message="invalid Product Details";
-		        response.sendRedirect("EditProducts.jsp?errorMessage="+message);
-		 }
+		// validating the form data such as product name, id, category,amount,quantity,status
+		boolean isvalidProductDetails = ProductDetailsValidator.productValidator(product);
+		if (isvalidProductDetails) {
+			EditProductService.updateProductsService(product);
+			String message = "Updated Successfully";
+			response.sendRedirect("ListProducts.jsp?infoMessage=" + message);
+		} else {
+			String message = "invalid Product Details";
+			response.sendRedirect("EditProducts.jsp?errorMessage=" + message);
+		}
 
-}
+	}
 }

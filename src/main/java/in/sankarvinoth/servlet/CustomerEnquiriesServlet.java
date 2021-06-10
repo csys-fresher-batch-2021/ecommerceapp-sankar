@@ -20,7 +20,8 @@ public class CustomerEnquiriesServlet extends HttpServlet {
        
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String subject =request.getParameter("subject");
+		// getting the form data
+    	String subject =request.getParameter("subject");
 		String message=request.getParameter("message");
 		String username=request.getParameter("username");
 		
@@ -28,8 +29,8 @@ public class CustomerEnquiriesServlet extends HttpServlet {
 			CustomerService.addMessagesService(username,subject,message);
 			response.sendRedirect("ListProducts.jsp");
 		} catch (ClassNotFoundException | SQLException e) {
-			
 			e.printStackTrace();
+			e.getMessage();
 		}
 	}
 

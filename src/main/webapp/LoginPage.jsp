@@ -23,11 +23,11 @@
 <form action="Loginservlet" method ="post">
 <h3> User Login</h3>
 <label>Username</label>
-<input type="text"  name="username"  placeholder="Enter your username" pattern="^[A-Za-z][A-Za-z0-9]{5,12}$"
-			title="username should be in valid format"  required><br/>
+<input type="text"  name="username"  placeholder="Enter your username" 
+			  required><br/>
 <label>Password</label>
-<input type="password"  name="password"  placeholder="Enter your password" pattern="^[A-Za-z0-9]{5,8}$"
-			title="password should be in given format"  required><br/>
+<input type="password"  name="password"  placeholder="Enter your password" 
+			  required><br/>
 
 
 <button class="btn btn-primary">Login</button>

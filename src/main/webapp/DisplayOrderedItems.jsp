@@ -1,10 +1,12 @@
 <%@page import=" java.util.List" %>
 <%@page import ="in.sankarvinoth.model.Cart" %>
 <%@page import="in.sankarvinoth.service.CartService"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Time"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<% String userName=(String)request.getAttribute("Logged_in_User"); %>
+	<% String userName=(String)session.getAttribute("Logged_in_User"); %>
 	
 <!DOCTYPE html>
 <html lang="en">
@@ -25,15 +27,16 @@
 			<thead>
 				<tr>
 					<th scope="col">S.no</th>
-					<th scope="col">UserName</th>
+					
 					<th scope="col">ProductName</th>
 					<th scope="col">ProductTotal(in Rs.)</th>
 					<th scope="col">Quantity</th>
-					
+					<th scope="col">Ordered Date</th>
+					<th scope="col">Ordered Time</th>
 					
 					</tr>
 				 
-					<% List<Cart> cartItems=CartService.getAllOrderedItemsService(userName);
+					<% List<Cart> cartItems=CartService.getAllOrderedItemsServiceForUser(userName);
 					 int  i=0;
 		    		  %>
 		    		  
@@ -47,16 +50,20 @@
 						String ProductName=item.getProductName();
 						int productTotal=item.getProductTotal();
 						int quantity=item.getQuantity();
-						
+						Date date=item.getOrderPlacedDate();
+						Time time=item.getOrderPlacedTime();
 						
 						%>
 			     <tr>
 			     <td><%=i%></td>
-			     <td><%=UserName%></td>
+			  
 			      <td><%=ProductName%></td>
 			     
 			      <td><%=productTotal%></td>
 			       <td><%=quantity%></td>
+			       <td><%=date%></td>
+			        <td><%=time%></td>
+			       
 			        </tr>
 				 <% }
 					} %>
