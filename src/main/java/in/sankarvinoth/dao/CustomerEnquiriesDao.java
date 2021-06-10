@@ -19,31 +19,33 @@ import in.sankarvinoth.util.connection.ConnectionUtil;
 public class CustomerEnquiriesDao {
 
 	private CustomerEnquiriesDao() {
-		
+
 	}
+
 	/**
 	 * method to insert the new enquiry messages into the user table
 	 * 
-	 * @param 
+	 * @param
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public static void addMessages(String Username,String Subject,String Message) throws ClassNotFoundException, SQLException {
-		
-		// getting the connection
-		Connection con = ConnectionUtil.getConnection();
+	public static void addMessages(String Username, String Subject, String Message)
+			throws ClassNotFoundException, SQLException {
+
+		Connection con = null;
 		PreparedStatement pst = null;
-		LocalDate date=LocalDate.now();
-		LocalTime time=LocalTime.now();
+		LocalDate date = LocalDate.now();
+		LocalTime time = LocalTime.now();
 
 		try {
-
+			// getting the connection
+			con = ConnectionUtil.getConnection();
 			String sql = "insert into CustomerEnquiry(username,subject,message,sendTo,messageSentDate,messageSenttime) values(?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
-			pst.setString(1,Username);
-			pst.setString(2,Subject);
-			pst.setString(3,Message);
-			pst.setString(4,"admin34");
+			pst.setString(1, Username);
+			pst.setString(2, Subject);
+			pst.setString(3, Message);
+			pst.setString(4, "admin34");
 			pst.setObject(5, date);
 			pst.setObject(6, time);
 			// executing query
@@ -56,17 +58,18 @@ public class CustomerEnquiriesDao {
 		}
 
 	}
+
 	/**
-	 * method to get all the messages stored in db 
+	 * method to get all the messages stored in db for admin
+	 * 
 	 * @return
 	 */
-	
-	public static  List<Customer> getAllMessages() {
+
+	public static List<Customer> getAllMessages() {
 		List<Customer> messages = new ArrayList<>();
 		Connection con = null;
 		Statement st = null;
 		ResultSet rst = null;
-		
 
 		try {
 			// getting the connection
@@ -79,12 +82,12 @@ public class CustomerEnquiriesDao {
 				String userName = rst.getString("username");
 				String subject = rst.getString("subject");
 				String message = rst.getString("message");
-				
+
 				String sentTo = rst.getString("sendTo");
-				
-				 Date date1=rst.getDate("messageSentDate");
-				 Time time1=rst.getTime("messageSenttime");
-				
+
+				Date date1 = rst.getDate("messageSentDate");
+				Time time1 = rst.getTime("messageSenttime");
+
 				Customer customer = new Customer();
 				customer.setUserName(userName);
 				customer.setSubject(subject);
@@ -92,10 +95,8 @@ public class CustomerEnquiriesDao {
 				customer.setSendTo(sentTo);
 				customer.setDate(date1.toLocalDate());
 				customer.setTime(time1.toLocalTime());
-				
-				
-				
-				// getting the values in ArrayList
+
+				// storing the values in ArrayList
 				messages.add(customer);
 			}
 
@@ -107,8 +108,6 @@ public class CustomerEnquiriesDao {
 
 		}
 		return messages;
-
-		
 
 	}
 }

@@ -14,18 +14,23 @@ public class ProductValidator {
 		
 		 
 	}
-
+  /**
+   * method to check whether the product already exists in the product table or not 
+   * @param product
+   * @return
+   * @throws ClassNotFoundException
+   * @throws SQLException
+   */
 	public static boolean isNewProductToRegister(Product product) throws ClassNotFoundException, SQLException {
 		 boolean isNewProduct=true;
 		 AddProductsDao dao=new AddProductsDaoImp1();
 		 List<Product> products= dao.findProductByProductId(product);
 		for(Product product1:products) {
 			 if(product1.getProductId().equals(product.getProductId())
-						|| product1.getProductName().equalsIgnoreCase(product.getProductName())) {
+					 ||  product1.getProductName().equalsIgnoreCase(product.getProductName())) {
 				 isNewProduct=false;
 				 break;
 			 }
-			
 		 }
 		return isNewProduct;
 		 

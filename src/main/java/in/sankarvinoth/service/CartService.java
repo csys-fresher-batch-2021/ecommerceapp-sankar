@@ -5,6 +5,7 @@ import java.util.List;
 
 import in.sankarvinoth.dao.CartDao;
 import in.sankarvinoth.dao.CartDaoImp;
+import in.sankarvinoth.exceptions.DBException;
 import in.sankarvinoth.model.Cart;
 import in.sankarvinoth.model.Product;
 
@@ -27,13 +28,11 @@ public class CartService {
 	public static List<String> getAllProductIds() {
 		return productIds;
 	}
+
 	public static List<String> setAllProductIds(String productId) {
-       productIds.add(productId);
-	return productIds;
+		productIds.add(productId);
+		return productIds;
 	}
-	
-	
-	
 
 	/**
 	 * method to add products to cart gives the corresponding values inEqual of
@@ -45,42 +44,44 @@ public class CartService {
 	public static List<Product> addProductToCartService(List<String> productIds) {
 
 		List<Product> productsInTheCart = cart.getAllProducts(productIds);
-	    return productsInTheCart;
+		return productsInTheCart;
 
 	}
-	
+
 	/**
-	 * method to delete the product which maps with the product Id given from remove from cart servlet
+	 * method to delete the product which maps with the product Id given from remove
+	 * from cart servlet
+	 * 
 	 * @param products
 	 * @param productId
 	 * @return
 	 */
-	public static boolean deleteProductFromCart(List<Product> products,String productId,List<String> productIds) {
-		boolean isDeleted=false;
+	public static boolean deleteProductFromCart(List<Product> products, String productId, List<String> productIds) {
+		boolean isDeleted = false;
 		Product isExists = null;
-		
-		for(Product product:products ) {
-			if(product.getProductId().equalsIgnoreCase(productId)) {
-				isExists= product;
+
+		for (Product product : products) {
+			if (product.getProductId().equalsIgnoreCase(productId)) {
+				isExists = product;
 				break;
 			}
 		}
-		if(isExists!= null) {
+		if (isExists != null) {
 			products.remove(isExists);
 			productIds.remove(productId);
-			isDeleted=true;
-			
+			isDeleted = true;
+
 		}
 		return isDeleted;
-		
-		
-		
+
 	}
-	 
-	public static List<Cart> getAllOrderedItemsService(String userName) {
-		 return cart.getAllPlacedOrders(userName);
+
+	public static List<Cart> getAllOrderedItemsServiceForUser(String userName) throws DBException {
+		return cart.getAllPlacedOrdersForUser(userName);
 	}
-	
+
+	public static List<Cart> getAllOrderedItemsServiceForAdmin() throws DBException {
+		return cart.getAllPlacedOrdersForAdmin();
+	}
 
 }
-

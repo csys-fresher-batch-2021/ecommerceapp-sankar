@@ -22,7 +22,7 @@ public class Loginservlet extends HttpServlet {
       
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+         // getting form values
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		User user = new User();

@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<% String username=(String)session.getAttribute("Logged_in_User"); %>
+<%
+String username = (String) session.getAttribute("Logged_in_User");
+%>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <meta charset="ISO-8859-1">
@@ -29,7 +31,7 @@
 		%>
 		<h3>User Cart</h3>
 		<input type="hidden" id="username" value="<%=username%>">
-		
+
 		<table class="table table-bordered" id="table">
 			<caption>Products name along with its serial number</caption>
 			<thead>
@@ -46,9 +48,8 @@
 				</tr>
 
 				<%
-				List<Product> products = (List<Product>)session.getAttribute("productslist");
+				List<Product> products = (List<Product>) session.getAttribute("productslist");
 				int i = 0;
-				
 				%>
 
 
@@ -69,11 +70,15 @@
 					<td><%=productId%></td>
 					<td><%=productName%></td>
 					<td><%=category%></td>
-					<td><input type="number"  id="amount_<%=productName%>"   readonly value="<%=amount%>" ></td>
-					<td><input type="number" id="quantity_<%=productName%>" onchange="productTotal('<%=productName%>','<%=productId%>')" min="1" max="100"></td>
-					<td><input type="number" id="producttotal_<%=productName%>" readonly ></td>
+					<td><input type="number" id="amount_<%=productName%>" readonly
+						value="<%=amount%>"></td>
+					<td><input type="number" id="quantity_<%=productName%>"
+						onchange="productTotal('<%=productName%>','<%=productId%>')"
+						min="1" max="100"></td>
+					<td><input type="number" id="producttotal_<%=productName%>"
+						readonly></td>
 					<td><%=status%></td>
-					
+
 					<td><a href="RemoveFromCartServlet?Id=<%=productId%>">remove</a></td>
 
 
@@ -88,16 +93,22 @@
 			</thead>
 		</table>
 		<a href="EmptyCartServlet">Empty cart</a>
-	
+
 	</main>
+
+	Sub Total(in Rs.) :
+	<input type="number" name="TotalAmount" id="total" readonly>
 	
-	Total Price(in Rs.) :<input type="number" name="TotalAmount" id="total" readonly >
-	Total Price With  10 % Gst(in Rs.):<input type="number" name="TotalAmountwithgst" id="totalwithgst" readonly >
-	<button type="button" class="btn btn-warning" onclick="placeOrder()">Confirm Order</button>
+	Total Price With 10 % Gst(in Rs.):
+	<input type="number" name="TotalAmountwithgst" id="totalwithgst"
+		readonly>
+		<%if(username!=null) { %>
+	<button type="button" class="btn btn-warning" onclick="placeOrder()">Confirm
+		Order</button>
+		<% } %>
 	<script>
 	function productTotal(productName,productId) {
 		let total = 0;
-		
 		let price=document.getElementById("amount_" +productName).value;
 		let qty=document.getElementById("quantity_"+productName).value;
 		let amount = price*qty;
@@ -138,14 +149,18 @@
 		let data={userId:username,items:items,totalAmount:totalCartAmount,totalAmountWithOutGST:totalAmounts};
 		axios.post(url,data).then(res=> {
 			console.log(res);
+			if(totalAmounts==0) {
+				alert("nothing in your cart");
+			}else {
 			alert("order placed successfully");
-			window.location = "DisplayOrderedItems.jsp";
+			window.location = "index.jsp?";
+		}
 		});
 	}
 
 	</script>
-	
-	
+
+
 
 </body>
 </html>

@@ -8,8 +8,6 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h3>Welcome To E-Commerce App</h3>
-		
-		
 	</main>
 </body>
 </html>

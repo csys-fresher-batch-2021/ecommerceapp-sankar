@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import in.sankarvinoth.dao.AddProductsDao;
 import in.sankarvinoth.dao.AddProductsDaoImp1;
-
+import in.sankarvinoth.exceptions.DBException;
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.util.validator.ProductDetailsValidator;
 import in.sankarvinoth.util.validator.ProductValidator;
@@ -23,25 +23,28 @@ public class AddProductsService {
 	 * @return
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
+	 * @throws DBException
+	 * @throws ProductIdException
 	 */
-	public static boolean addProductService(Product product) throws ClassNotFoundException, SQLException {
+	public static boolean addProductService(Product product) throws ClassNotFoundException, SQLException, DBException {
 
 		boolean isValid = false;
 		// validating product inputs
 		boolean isValidProductDetails = ProductDetailsValidator.productValidator(product);
 		// validating whether the product already exists or not in the database
-		 boolean isvalidNewProduct=ProductValidator.isNewProductToRegister(product);
+		boolean isvalidNewProductId = ProductValidator.isNewProductToRegister(product);
+
 		if (isValidProductDetails) {
-			if(isvalidNewProduct)
-			 {
+			if (isvalidNewProductId) {
 				dao.save(product);
 				isValid = true;
-				
+
 			} else {
 				isValid = false;
 			}
-
 		}
+
 		return isValid;
 	}
+
 }

@@ -8,6 +8,12 @@
 <meta charset="ISO-8859-1">
 <title>E-CommerceApp</title>
 </head>
+<%
+	String errorMessage = request.getParameter("errorMessage");
+	if (errorMessage != null) {
+		out.println("<font color ='red'>" + errorMessage + "</font>");
+	}
+	%>
 <body>
    <h3>Password Reset</h3>
 	<form action="ForgotPasswordServlet" method="post">
@@ -29,23 +35,20 @@
 			<option value="What is the name of the road you grew up on?">What
 				is the name of the road you grew up on?</option>
 		</select><br /> 
-		<label> your SecurityAnswer:</label> <input type="text"
-			name="securityanswer" placeholder="Enter Security Answer "   title ="Should be valid" required><br />
+		<label> your SecurityAnswer:</label> 
+		<input type="text"
+			name="securityanswer" placeholder="Enter Security Answer " title ="Should be valid" required><br />
 		<label> New Password</label> <input type="password" name="password"
 			placeholder="Enter New password" pattern="^[A-Za-z0-9]{5,8}$"
-			title="password should be in given format" required><br /> <label>Confirm
+			title="password can have alphabets and digits" required><br /> <label>Confirm
 			Password</label> <input type="password" name="confirmPassword"
 			placeholder="retype password" pattern="^[A-Za-z0-9]{5,8}$"
-			title="password should be in given format" required><br />
+			title="password can have alphabets and digits" required><br />
 		<button class="btn btn-primary" type="submit">Reset Password</button>
 		<button class="btn btn-danger" type="reset">cancel</button>
 		<a href="LoginPage.jsp">Login</a>
 
 	</form>
-	<ul>
-	<li>Password :should have alphabets and numbers only minimum and maximum length of password should be (5-8)</li>
-	<li>ConfirmPassword :should have alphabets and numbers only minimum and maximum length of password should be (5-8)</li>
-	</ul>
-
+	
 </body>
 </html>

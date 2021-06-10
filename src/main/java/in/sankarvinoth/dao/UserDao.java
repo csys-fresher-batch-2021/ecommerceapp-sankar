@@ -7,8 +7,6 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import in.sankarvinoth.model.User;
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
@@ -32,12 +30,13 @@ public class UserDao {
 		String password = user.getPassword();
 		String securityQuestion = user.getSecurityQuestion();
 		String securityAnswer = user.getSecurityAnswer();
-		// getting the connection
-		Connection con = ConnectionUtil.getConnection();
+		
+		Connection con = null;
 		PreparedStatement pst = null;
 
 		try {
-
+			// getting the connection
+              con=ConnectionUtil.getConnection();;
 			String sql = "insert into UserRegister(fullName,userName,email,mobileNumber,password,SecurityQuestion,SecurityAnswer) values(?,?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, fullName);
@@ -190,8 +189,6 @@ public class UserDao {
 			ConnectionUtil.close(con, st, rst);
 
 		}
-		
-
 	}
 
 
@@ -231,7 +228,6 @@ public class UserDao {
 				st.setLong(2, mobileNumber);
 				st.setString(3, securityQuestion);
 				st.setString(4, securityAnswer);
-
 				st.executeUpdate();
 				isExists = true;
 
@@ -245,7 +241,6 @@ public class UserDao {
 
 		}
 		return isExists;
-
 	}
 
 }

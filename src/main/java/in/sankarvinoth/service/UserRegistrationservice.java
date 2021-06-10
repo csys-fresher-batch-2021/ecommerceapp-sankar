@@ -25,7 +25,7 @@ public class UserRegistrationservice {
 		// validation for new user and existing user
 		boolean isNewUser = UserValidator.userValidation(user);
 
-		if(isNewUser) {
+		if (isNewUser) {
 			UserDao.addUserToUserRegister(user);
 			isValidRegistration = true;
 		}

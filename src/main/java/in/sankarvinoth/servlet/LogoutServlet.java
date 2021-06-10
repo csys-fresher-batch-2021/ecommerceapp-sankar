@@ -30,10 +30,10 @@ public class LogoutServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		// removing the username from session
+		// getting the list of productIds 
 		List<String> productsids=CartService.getAllProductIds();
 		productsids.clear();
-				
+			
 		session.invalidate();
 		
 		response.sendRedirect("LoginPage.jsp");

@@ -2,7 +2,6 @@ package in.sankarvinoth.servlet;
 
 import java.io.IOException;
 
-import java.sql.SQLException;
 
 
 import javax.servlet.ServletException;
@@ -10,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.service.AddProductsService;
@@ -38,6 +38,7 @@ public class AddProductsServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// getting all the form data
 	    String productId = request.getParameter("productid");
 		int quantity = Integer.parseInt(request.getParameter("productquantity"));
 		String productName = request.getParameter("productName");
@@ -53,17 +54,21 @@ public class AddProductsServlet extends HttpServlet {
 		product.setProductId(productId);
 		product.setQuantity(quantity);
 		try {
-			if (AddProductsService.addProductService(product)) {
+			// validating the product already exists in the database 
+			if(AddProductsService.addProductService(product)) {
 				String message = "Product added Successfully";
 				response.sendRedirect("ListProducts.jsp?infoMessage=" + message);
-			} else {
+			} 
+			else {
 				String message = "Product already exists";
 				response.sendRedirect("AddProducts.jsp?errorMessage=" + message);
 			}
-		} catch (ClassNotFoundException | SQLException | IOException e) {
-
-			e.printStackTrace();
+		} catch (Exception e) {
+            e.printStackTrace();
+            e.getMessage();
+            
 		}
 	}
 
+	
 }

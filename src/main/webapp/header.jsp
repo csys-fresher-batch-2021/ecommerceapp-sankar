@@ -27,7 +27,10 @@
         <a class="nav-link" href="AddProducts.jsp">Add Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="DisplayOrderedItems.jsp">Orders Received</a>
+        <a class="nav-link" href="OrdersRecceived.jsp">Orders Received</a>
+      </li>
+     <li class="nav-item">
+        <a class="nav-link" href="chart.jsp">Analytics</a>
       </li>
      <%  }
        else if(LoggedUser!=null){ %> 
@@ -41,16 +44,7 @@
         <a class="nav-link" href="DisplayOrderedItems.jsp">My Orders</a>
       </li>
      <%  }%>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownId">
-          <a class="dropdown-item" href="#">Action 1</a>
-          <a class="dropdown-item" href="#">Action 2</a>
-        </div>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="Cart.jsp">Cart</a>
-      </li>
+     
      
     </ul>
      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">

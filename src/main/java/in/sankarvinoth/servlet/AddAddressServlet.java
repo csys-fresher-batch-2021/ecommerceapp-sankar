@@ -17,6 +17,7 @@ public class AddAddressServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 // getting the form data
 		String Username=request.getParameter("username");
 		String address=request.getParameter("address");
 		UserDao.updateUserAddress(address,Username);
