@@ -4,87 +4,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.sankarvinoth.exceptions.DBException;
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
-public class ProductsDaoImp implements ProductsDao {
+public class ProductsDAOImp implements ProductsDAO {
 
 	/** 
-	 * method to get all the products in the database
+	 * method to get all the products in the database 
+	 * this method will return the product details in the form of list
 	 */
 	public List<Product> getAllProducts() {
-		List<Product> products = new ArrayList<>();
+		List<Product> availableProducts = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rst = null;
-		String productName = null;
+	
 
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
 
-			String sql1 = "SELECT * FROM productinfo ORDER BY productname ";
+			String sql1 = "SELECT ProductName,ProductId,Category,Price,quantity,Status FROM productinfo ORDER BY productname ";
 			st = con.prepareStatement(sql1);
 			rst = st.executeQuery();
 
 			while (rst.next()) {
 
-				productName = rst.getString("ProductName");
-				String productId = rst.getString("ProductId");
-				String category = rst.getString("Category");
-				int price = rst.getInt("Price");
-				int quantity = rst.getInt("quantity");
-				String status = rst.getString("Status");
-				Product product = new Product();
-				product.setProductName(productName);
-				product.setProductId(productId);
-				product.setCategory(category);
-				product.setAmount(price);
-				product.setQuantity(quantity);
-				product.setStatus(status);
-
-				// getting the values in ArrayList
-				products.add(product);
-			}
-
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// closing the connection
-			ConnectionUtil.close(con, st, rst);
-
-		}
-
-		return products;
-
-	}
-    
-	/**
-	 * method to get the list of products that is in the database which matches with
-	 * the search
-	 */
-	@Override
-	
-	public List<Product> searchForProduct(String searchedProduct) {
-		List<Product> searchProducts = new ArrayList<>();
-		Connection con = null;
-		Statement st = null;
-		ResultSet rst = null;
-
-		try {
-			// getting the connection
-			con = ConnectionUtil.getConnection();
-
-			st = con.createStatement();
-			String sql = "select * from productInfo where ProductName ~* '" + searchedProduct + "'  or Category ~* '"
-					+ searchedProduct + "'";
-			rst = st.executeQuery(sql);
-			while (rst.next()) {
-
 				String productName = rst.getString("ProductName");
 				String productId = rst.getString("ProductId");
 				String category = rst.getString("Category");
@@ -98,8 +47,9 @@ public class ProductsDaoImp implements ProductsDao {
 				product.setAmount(price);
 				product.setQuantity(quantity);
 				product.setStatus(status);
+
 				// getting the values in ArrayList
-				searchProducts.add(product);
+				availableProducts.add(product);
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -109,16 +59,20 @@ public class ProductsDaoImp implements ProductsDao {
 			ConnectionUtil.close(con, st, rst);
 
 		}
-		return searchProducts;
+		return availableProducts;
+
+		
 
 	}
+    
+
 
 	@Override
 	/**
 	 * method to get the list of products that is in the database which matches with
 	 * the search
 	 */
-	public List<Product> searchProductByProductId(String productId) {
+	public List<Product> searchProductByProductId(String productId) throws DBException {
 		List<Product> products = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement st = null;
@@ -127,8 +81,9 @@ public class ProductsDaoImp implements ProductsDao {
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = "select * from productInfo where ProductId = '" + productId + "'";
+			String sql = "SELECT ProductName,Category,Price,quantity,Status FROM productInfo where ProductId = ?";
 			st = con.prepareStatement(sql);
+			st.setString(1,productId);
 
 			rst = st.executeQuery();
 			while (rst.next()) {
@@ -150,8 +105,9 @@ public class ProductsDaoImp implements ProductsDao {
 				products.add(product);
 			}
 
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			throw new DBException("Product Doesn't exist");
 		} finally {
 			// closing the connection
 			ConnectionUtil.close(con, st, rst);
@@ -165,12 +121,13 @@ public class ProductsDaoImp implements ProductsDao {
 	/**
 	 * method to update the data depends upon the changes in the corresponding
 	 * fields
+	 * @throws DBException 
 	 */
-	public List<Product> updateStock(Product product) {
-		List<Product> products = new ArrayList<>();
+	public void updateStock(Product product) throws DBException{
+		
 		Connection con = null;
 		PreparedStatement st = null;
-		ResultSet rst = null;
+		
 
 		try {
 
@@ -182,22 +139,24 @@ public class ProductsDaoImp implements ProductsDao {
 			String status = product.getStatus();
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = "update productInfo set productName='" + productName + "',Category='" + productCategory
-					+ "',Price='" + amount + "',quantity='" + quantity + "',Status='" + status + "' where productId='"
-					+ productId + "'";
+			String sql = "UPDATE productInfo SET (productName,Category,Price,quantity,Status) = (?,?,?,?,?)where productId=?";
 			st = con.prepareStatement(sql);
+			st.setString(1,productName);
+			st.setString(2,productCategory);
+			st.setInt(3,amount);
+			st.setInt(4,quantity);
+			st.setString(5,status);
+			st.setString(6,productId);
+		    st.executeUpdate();
 
-			rst = st.executeQuery();
-
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			throw new DBException("ProductId not exists in the Table");
+			
 		} finally {
 			// closing the connection
-			ConnectionUtil.close(con, st, rst);
-
-		}
-		return products;
-
+			ConnectionUtil.close(con, st);
+			}
 	}
 
 	@Override
@@ -211,7 +170,7 @@ public class ProductsDaoImp implements ProductsDao {
 
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = "select productname,sum(quantity) from placedOrders group by productname";
+			String sql = "SELECT productname,sum(quantity) FROM placedOrders group by productname";
 			st = con.prepareStatement(sql);
 
 			rst = st.executeQuery();
@@ -224,8 +183,9 @@ public class ProductsDaoImp implements ProductsDao {
 				productsQuantity.add(product);
 			}
 
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			
 		} finally {
 			// closing the connection
 			ConnectionUtil.close(con, st, rst);
@@ -233,5 +193,13 @@ public class ProductsDaoImp implements ProductsDao {
 		}
 
 	}
+
+
+	
+
+
+	
+
+
 
 }

@@ -3,7 +3,7 @@ package in.sankarvinoth.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import in.sankarvinoth.dao.CustomerEnquiriesDao;
+import in.sankarvinoth.dao.CustomerEnquiriesDAO;
 import in.sankarvinoth.model.Customer;
 
 public class CustomerService {
@@ -24,7 +24,7 @@ public class CustomerService {
 
 	public static void addMessagesService(String username, String subject, String message)
 			throws ClassNotFoundException, SQLException {
-		CustomerEnquiriesDao.addMessages(username, subject, message);
+		CustomerEnquiriesDAO.addMessages(username, subject, message);
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class CustomerService {
 	 */
 
 	public static List<Customer> getAllMessagesService() {
-		List<Customer> Customers = CustomerEnquiriesDao.getAllMessages();
+		List<Customer> Customers = CustomerEnquiriesDAO.getAllMessages();
 		return Customers;
 
 	}

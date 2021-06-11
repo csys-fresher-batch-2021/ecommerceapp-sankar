@@ -42,15 +42,15 @@ public class AddProductsServlet extends HttpServlet {
 	    String productId = request.getParameter("productid");
 		int quantity = Integer.parseInt(request.getParameter("productquantity"));
 		String productName = request.getParameter("productName");
-		String category = request.getParameter("productcategory");
-		int price = Integer.parseInt(request.getParameter("productPrice"));
-		String status = request.getParameter("productstatus");
+		String productCategory = request.getParameter("productcategory");
+		int productPrice = Integer.parseInt(request.getParameter("productPrice"));
+		String availableStatus = request.getParameter("productstatus");
 
 		Product product = new Product();
 		product.setProductName(productName);
-		product.setCategory(category);
-		product.setAmount(price);
-		product.setStatus(status);
+		product.setCategory(productCategory);
+		product.setAmount(productPrice );
+		product.setStatus(availableStatus);
 		product.setProductId(productId);
 		product.setQuantity(quantity);
 		try {

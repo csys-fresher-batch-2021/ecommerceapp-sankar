@@ -32,7 +32,7 @@ public class Loginservlet extends HttpServlet {
 			boolean status = UserLoginService.userLogin(user);
 			if (status) {
 				HttpSession session = request.getSession();
-				// storing the username in session
+				// storing the UserName in session
 				session.setAttribute("Logged_in_User", userName);
 				response.sendRedirect("index.jsp");
 

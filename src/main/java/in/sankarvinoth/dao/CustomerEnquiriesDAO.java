@@ -16,9 +16,9 @@ import in.sankarvinoth.model.Customer;
 
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
-public class CustomerEnquiriesDao {
+public class CustomerEnquiriesDAO {
 
-	private CustomerEnquiriesDao() {
+	private CustomerEnquiriesDAO() {
 
 	}
 
@@ -40,7 +40,7 @@ public class CustomerEnquiriesDao {
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = "insert into CustomerEnquiry(username,subject,message,sendTo,messageSentDate,messageSenttime) values(?,?,?,?,?,?)";
+			String sql = "INSERT INTO CustomerEnquiry(username,subject,message,sendTo,messageSentDate,messageSenttime) values(?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, Username);
 			pst.setString(2, Subject);
@@ -76,7 +76,7 @@ public class CustomerEnquiriesDao {
 			con = ConnectionUtil.getConnection();
 
 			st = con.createStatement();
-			rst = st.executeQuery("select * from CustomerEnquiry");
+			rst = st.executeQuery("SELECT username,subject,message,sendTo,messageSentDate,messageSenttime  FROM CustomerEnquiry ORDER BY messageSentDate desc  ");
 			while (rst.next()) {
 
 				String userName = rst.getString("username");

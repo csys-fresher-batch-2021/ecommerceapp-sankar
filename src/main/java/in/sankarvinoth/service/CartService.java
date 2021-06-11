@@ -3,8 +3,8 @@ package in.sankarvinoth.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sankarvinoth.dao.CartDao;
-import in.sankarvinoth.dao.CartDaoImp;
+import in.sankarvinoth.dao.CartDAO;
+import in.sankarvinoth.dao.CartDAOImp;
 import in.sankarvinoth.exceptions.DBException;
 import in.sankarvinoth.model.Cart;
 import in.sankarvinoth.model.Product;
@@ -15,7 +15,7 @@ public class CartService {
 
 	}
 
-	private static final CartDao cart = new CartDaoImp();
+	private static final CartDAO cart = new CartDAOImp();
 	// ArrayList to store the product Ids
 	static List<String> productIds = new ArrayList<>();
 

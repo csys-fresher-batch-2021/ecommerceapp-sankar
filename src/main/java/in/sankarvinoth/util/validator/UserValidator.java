@@ -3,7 +3,7 @@ package in.sankarvinoth.util.validator;
 import java.sql.SQLException;
 import java.util.List;
 
-import in.sankarvinoth.dao.UserDao;
+import in.sankarvinoth.dao.UserDAO;
 
 import in.sankarvinoth.model.User;
 
@@ -23,7 +23,7 @@ public class UserValidator {
 	 */
 	public static boolean userValidation(User user) throws ClassNotFoundException, SQLException {
 		boolean isValidUser = true;
-		List<User> users = UserDao.findUserByPhoneNumberandEmail(user.getPhoneNumber(), user.getEmail());
+		List<User> users = UserDAO.findUserByPhoneNumberandEmail(user.getPhoneNumber(), user.getEmail());
 		for (User userdetails : users) {
 			if (userdetails.getPhoneNumber().equals(user.getPhoneNumber())
 					|| userdetails.getEmail().equals(user.getEmail())) {
@@ -44,7 +44,7 @@ public class UserValidator {
 	 */
 	public static boolean userLoginValidation(User user) throws ClassNotFoundException, SQLException {
 		boolean isValidUser = false;
-		List<User> users = UserDao.userLoginVerification(user.getUserName(), user.getPassword());
+		List<User> users = UserDAO.userLoginVerification(user.getUserName(), user.getPassword());
 		for (User userdetails : users) {
 			if (userdetails.getUserName().equals(user.getUserName())
 					&&  userdetails.getPassword().equals(user.getPassword())) {

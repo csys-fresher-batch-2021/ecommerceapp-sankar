@@ -10,8 +10,8 @@ import java.util.List;
 import in.sankarvinoth.model.User;
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
-public class UserDao {
-	private UserDao() {
+public class UserDAO {
+	private UserDAO() {
 
 	}
 
@@ -77,10 +77,11 @@ public class UserDao {
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = ("select * from UserRegister where mobileNumber='" + phoneNumber + "' or email='" + email
-					+ "' ");
+			String sql = ("select mobileNumber,email from UserRegister where mobileNumber=? or email=?");
 
 			st = con.prepareStatement(sql);
+			st.setLong(1,phoneNumber);
+			st.setString(2,email);
 
 			rst = st.executeQuery();
 			while (rst.next()) {
@@ -128,10 +129,11 @@ public class UserDao {
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = ("select * from UserRegister where userName='" + userName + "' and password ='" + password
-					+ "'");
+			String sql = ("select fullName,userName,email,mobileNumber,password from UserRegister where userName=? and password=?");
 
 			st = con.prepareStatement(sql);
+			st.setString(1,userName);
+			st.setString(2,password);
 
 			rst = st.executeQuery();
 			while (rst.next()) {
@@ -176,9 +178,10 @@ public class UserDao {
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = "update UserRegister set address='" +address+ "' where userName='"
-					+username+ "'";
+			String sql = "update UserRegister set address=? where userName=?";
 			st = con.prepareStatement(sql);
+			st.setString(1,address);
+			st.setString(2,username);
 
 			rst = st.executeQuery();
 
@@ -215,9 +218,10 @@ public class UserDao {
 
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-			String sql = ("select mobileNumber from UserRegister where mobileNumber='" + mobileNumber + "'");
+			String sql = ("select mobileNumber from UserRegister where mobileNumber=?");
 
 			st = con.prepareStatement(sql);
+			st.setLong(1,mobileNumber);
 
 			rst = st.executeQuery();
 			while (rst.next()) {

@@ -7,18 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import in.sankarvinoth.exceptions.ProductIdExistsException;
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
-public class AddProductsDaoImp1 implements AddProductsDao {
+public class AddProductsDAOImp1 implements AddProductsDAO {
 
 	@Override
 	/**
 	 * method to insert the products to the table in the database inputs:
 	 * productId,productName,category,price,quantity,status
 	 */
-	public void save(Product product) throws ClassNotFoundException, SQLException {
+	public void save(Product product) throws ClassNotFoundException, SQLException, ProductIdExistsException {
 		// getting all the from data 
 		String productId = product.getProductId();
 		int quantity = product.getQuantity();
@@ -32,7 +32,7 @@ public class AddProductsDaoImp1 implements AddProductsDao {
 		try {
 			// getting a connection 
 			con =ConnectionUtil.getConnection();
-			String sql = "insert into productinfo(ProductId,ProductName,Category,Price,quantity,Status) values(?,?,?,?,?,?)";
+			String sql = "INSERT INTO  productinfo(ProductId,ProductName,Category,Price,quantity,Status) values(?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, productId);
 			pst.setString(2, productName);
@@ -44,6 +44,7 @@ public class AddProductsDaoImp1 implements AddProductsDao {
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new ProductIdExistsException("Product Id exists can't duplicate Product Id");
 			
 		} finally {
 			// closing the connection
@@ -73,7 +74,7 @@ public class AddProductsDaoImp1 implements AddProductsDao {
 			//getting the connection
 			con = ConnectionUtil.getConnection();
 			// query for search operation
-			String sql = ("select * from productInfo where ProductId =? and ProductName =? ");
+			String sql = ("select productId,productName from productInfo where ProductId =? and ProductName =? ");
 			 st = con.prepareStatement(sql);
 			 st.setString(1,productId);
 			 st.setString(2,productName);
@@ -89,6 +90,7 @@ public class AddProductsDaoImp1 implements AddProductsDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		} finally {
 			// closing the connection
 			ConnectionUtil.close(con,st,rs);

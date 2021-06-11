@@ -2,7 +2,7 @@ package in.sankarvinoth.service;
 
 import java.sql.SQLException;
 
-import in.sankarvinoth.dao.UserDao;
+import in.sankarvinoth.dao.UserDAO;
 import in.sankarvinoth.model.User;
 import in.sankarvinoth.util.validator.UserValidator;
 
@@ -26,7 +26,7 @@ public class UserRegistrationservice {
 		boolean isNewUser = UserValidator.userValidation(user);
 
 		if (isNewUser) {
-			UserDao.addUserToUserRegister(user);
+			UserDAO.addUserToUserRegister(user);
 			isValidRegistration = true;
 		}
 		return isValidRegistration;

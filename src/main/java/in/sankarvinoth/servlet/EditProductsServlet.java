@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.sankarvinoth.exceptions.DBException;
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.service.EditProductService;
 import in.sankarvinoth.util.validator.ProductDetailsValidator;
@@ -43,7 +44,12 @@ public class EditProductsServlet extends HttpServlet {
 		// validating the form data such as product name, id, category,amount,quantity,status
 		boolean isvalidProductDetails = ProductDetailsValidator.productValidator(product);
 		if (isvalidProductDetails) {
-			EditProductService.updateProductsService(product);
+			try {
+				EditProductService.updateProductsService(product);
+			} catch (DBException e) {
+				e.printStackTrace();
+				e.getMessage();
+			}
 			String message = "Updated Successfully";
 			response.sendRedirect("ListProducts.jsp?infoMessage=" + message);
 		} else {

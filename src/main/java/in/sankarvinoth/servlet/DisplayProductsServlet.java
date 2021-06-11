@@ -39,9 +39,9 @@ public class DisplayProductsServlet extends HttpServlet {
 		
 		 List<Product> products = ProductService.getAllProductsfromDb();
 		Gson gson = new Gson();
-		// converting the list to json
+		// converting the list to JSON
 		String json = gson.toJson(products);
-		// writting JSon response
+		// Writing JSon response
 		PrintWriter out = response.getWriter();
 		out.print(json);
 		out.flush();
