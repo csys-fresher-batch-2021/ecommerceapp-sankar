@@ -1,5 +1,4 @@
 package in.sankarvinoth.dao;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,13 +8,12 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import in.sankarvinoth.exceptions.DBException;
 import in.sankarvinoth.model.Cart;
 import in.sankarvinoth.model.Product;
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
-public class CartDaoImp implements CartDao {
+public class CartDAOImp implements CartDAO {
 	/**
 	 * method to get all the placed orders of particular users.
 	 * 
@@ -35,13 +33,11 @@ public class CartDaoImp implements CartDao {
 		try {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
-
-			String sql = "select  * from placedOrders where Username=? ";
+			String sql = "SELECT productName,productTotal,quantity,orderedDate,orderedTime FROM placedOrders where Username=? ";
 			st = con.prepareStatement(sql);
 			st.setString(1, userName);
 			rst = st.executeQuery();
 			while (rst.next()) {
-
 				productName = rst.getString("productName");
 				int producTotal = rst.getInt("productTotal");
 				quantity = rst.getInt("Quantity");
@@ -53,8 +49,8 @@ public class CartDaoImp implements CartDao {
 				cart.setProductName(productName);
 				cart.setProductTotal(producTotal);
 				cart.setQuantity(quantity);
-				cart.setOrderPlacedDate(date);
-				cart.setOrderPlacedTime(time);
+				cart.setOrderPlacedDate(date.toLocalDate());
+				cart.setOrderPlacedTime(time.toLocalTime());
 
 				// storing the values in ArrayList
 				cartItems.add(cart);
@@ -86,7 +82,7 @@ public class CartDaoImp implements CartDao {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
 
-			String sql = "select  * from placedOrders order by ordereddate desc";
+	       String sql = "SELECT userName,productName,productTotal,quantity,orderedDate,orderedTime FROM placedOrders ORDER BY  ordereddate desc";
 			st = con.prepareStatement(sql);
 			rst = st.executeQuery();
 			while (rst.next()) {
@@ -103,8 +99,8 @@ public class CartDaoImp implements CartDao {
 				cart.setProductName(productName);
 				cart.setProductTotal(producTotal);
 				cart.setQuantity(quantity);
-				cart.setOrderPlacedDate(date);
-				cart.setOrderPlacedTime(time);
+				cart.setOrderPlacedDate(date.toLocalDate());
+				cart.setOrderPlacedTime(time.toLocalTime());
 
 				// getting the values in ArrayList
 				cartItems.add(cart);
@@ -137,7 +133,7 @@ public class CartDaoImp implements CartDao {
 			// getting the connection
 			con = ConnectionUtil.getConnection();
 			String inSql = String.join(",", Collections.nCopies(productIds.size(), "?"));
-			String sql = "select * from productInfo where ProductId IN ( " + inSql + ")";
+			String sql = "SELECT ProductName,ProductId,Category,Price,Status FROM productInfo where ProductId IN ( " + inSql + ")";
 
 			st = con.prepareStatement(sql);
 

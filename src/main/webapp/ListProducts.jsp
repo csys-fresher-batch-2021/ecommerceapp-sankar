@@ -28,10 +28,7 @@
 	}
 	%>
 		<h3>Products available in our shops</h3>
-		        <form  action ="SearchProducts.jsp" method="post">
-		      <input class="form-control me-2" type="search"  name="searchedProduct" placeholder="Search  for products,brands and more" required>
-              <button type="submit" value="search" class="btn btn-outline-success">Search</button>
-          </form>
+		   
 		
 
 		<table class="table table-bordered">
@@ -56,8 +53,6 @@
 					<% List<Product> products=ProductService.getAllProductsfromDb();
 					 int  i=0;
 		    		  %>
-		    		  
-		    		  
 		    		 <% if (products.size() == 0){ 
 		    			 out.println("<tr><td>No Records</td></tr>");
 		    		 }else{
@@ -68,14 +63,12 @@
 						String category=product.getCategory();
 						int amount=product.getAmount();
 						int quantity=product.getQuantity();
-						
 						String status=product.getStatus();
 						%>
 			     <tr>
 			     <td><%=i%></td>
 			     <td><%=productId%></td>
 			      <td><%=productName%></td>
-			     
 			      <td><%=category%></td>
 			      <td><%=amount%></td>
 			       <td><%=quantity%></td>
@@ -90,9 +83,6 @@
 			        </tr>
 				 <% }
 					} %>
-				
-				 
-				 
 			</thead>
 				</table>
 				

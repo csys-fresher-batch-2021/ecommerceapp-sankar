@@ -26,11 +26,11 @@ public class AddToCartServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// getting the productId from jsp
+		// getting the productId from JSP
 		String productId = request.getParameter("Id");
-		// passing the productids to the the arrylist to store the productids
+		// passing the ProductIds to the the ArrayList to store the ProductIds
 		CartService.setAllProductIds(productId);
-		// getting all the products Ids from the arraylist
+		// getting all the products Ids from the ArrayList
 		List<String> productsavailable = CartService.getAllProductIds();
 
 		List<Product> products = CartService.addProductToCartService(productsavailable);

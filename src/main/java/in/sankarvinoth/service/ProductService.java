@@ -3,17 +3,18 @@ package in.sankarvinoth.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import in.sankarvinoth.dao.ProductsDao;
-import in.sankarvinoth.dao.ProductsDaoImp;
+import in.sankarvinoth.dao.ProductsDAO;
+import in.sankarvinoth.dao.ProductsDAOImp;
 import in.sankarvinoth.model.Product;
 
 public class ProductService {
+	
 
 	private ProductService() {
 
 	}
 
-	private static final ProductsDao dao = new ProductsDaoImp();
+	private static final ProductsDAO dao = new ProductsDAOImp();
 
 	/**
 	 * method to get all products based upon the select query
@@ -31,22 +32,6 @@ public class ProductService {
 
 	}
 
-	/**
-	 * method to get the searched products result which is in the db .
-	 * 
-	 * @param searchedProduct
-	 * @return
-	 */
-	public static List<Product> getSearchResults(String searchedProduct) {
-
-		// calling the get all Products method .
-		List<Product> searchedResults = dao.searchForProduct(searchedProduct);
-		// copy of getAllProducts List
-		return new ArrayList<>(searchedResults);
-	}
-
-	public static void main(String args[]) {
-		dao.updateQuantity();
-	}
-
+	
+	
 }

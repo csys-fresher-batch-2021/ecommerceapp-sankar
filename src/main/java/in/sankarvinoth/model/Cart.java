@@ -1,8 +1,7 @@
 package in.sankarvinoth.model;
 
-import java.sql.Date;
-import java.sql.Time;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Cart {
 
@@ -48,28 +47,30 @@ public int getQuantity() {
 public void setQuantity(int quantity) {
 	this.quantity = quantity;
 }
-public Date getOrderPlacedDate() {
-	return orderPlacedDate;
-}
-public void setOrderPlacedDate(Date date) {
-	this.orderPlacedDate = date;
-}
-public Time getOrderPlacedTime() {
-	return orderPlacedTime;
-}
-public void setOrderPlacedTime(Time time) {
-	this.orderPlacedTime = time;
-}
+
 private String productName;
 private int productTotal;
 private int quantity;
-private Date orderPlacedDate;
-private Time orderPlacedTime;
+private LocalDate orderPlacedDate;
+private LocalTime orderPlacedTime;
+public LocalDate getOrderPlacedDate() {
+	return orderPlacedDate;
+}
+public void setOrderPlacedDate(LocalDate orderPlacedDate) {
+	this.orderPlacedDate = orderPlacedDate;
+}
+public LocalTime getOrderPlacedTime() {
+	return orderPlacedTime;
+}
+public void setOrderPlacedTime(LocalTime orderPlacedTime) {
+	this.orderPlacedTime = orderPlacedTime;
+}
 @Override
 public String toString() {
-	return "Cart [username=" + username + ", productName=" + productName + ", productTotal=" + productTotal
-			+ ", quantity=" + quantity + ", orderPlacedDate=" + orderPlacedDate + ", orderPlacedTime=" + orderPlacedTime
-			+ "]";
+	return "Cart [username=" + username + ", status=" + status + ", userName=" + userName + ", productName="
+			+ productName + ", productTotal=" + productTotal + ", quantity=" + quantity + ", orderPlacedDate="
+			+ orderPlacedDate + ", orderPlacedTime=" + orderPlacedTime + "]";
 }
+
 
 }

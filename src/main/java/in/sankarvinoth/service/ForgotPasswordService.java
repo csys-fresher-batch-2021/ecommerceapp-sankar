@@ -2,7 +2,7 @@ package in.sankarvinoth.service;
 
 import java.sql.SQLException;
 
-import in.sankarvinoth.dao.UserDao;
+import in.sankarvinoth.dao.UserDAO;
 import in.sankarvinoth.model.User;
 
 public class ForgotPasswordService {
@@ -20,7 +20,7 @@ public class ForgotPasswordService {
 	 * @throws SQLException
 	 */
 	public static boolean userPasswordService(User user) throws ClassNotFoundException, SQLException {
-		boolean isUpdated = UserDao.passwordUpdate(user);
+		boolean isUpdated = UserDAO.passwordUpdate(user);
 		return isUpdated;
 
 	}

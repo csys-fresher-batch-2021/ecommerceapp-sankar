@@ -12,7 +12,7 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 <body>
-<h3> Edit Products</h3>
+
 <form action="EditProductsServlet" method="post">
  <% String productId= request.getParameter("Id"); %>
 <% List<Product> productsDetails=EditProductService.getSearchResults(productId);

@@ -1,8 +1,8 @@
 <%@page import=" java.util.List" %>
 <%@page import ="in.sankarvinoth.model.Customer" %>
 <%@page import="in.sankarvinoth.service.CustomerService"%>
-<%@page import=" java.time.LocalDate" %>
-<%@page import=" java.time.LocalTime" %>
+<%@page import="java.time.format.DateTimeFormatter"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	<% String User=(String)request.getAttribute("Logged_in_User"); %>
@@ -47,8 +47,8 @@
 						String UserName=message.getUserName();
 						String subject=message.getSubject();
 						String receivedMessages=message.getMessage();
-						LocalDate  date=message.getDate();
-						LocalTime  time=message.getTime();
+						String date = message.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+						String time = message.getTime().format(DateTimeFormatter.ofPattern("HH:mm"));
 						
 						
 						%>

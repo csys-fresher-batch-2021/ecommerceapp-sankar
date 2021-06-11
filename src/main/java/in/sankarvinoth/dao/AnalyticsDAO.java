@@ -13,9 +13,9 @@ import in.sankarvinoth.model.Analytics;
 
 import in.sankarvinoth.util.connection.ConnectionUtil;
 
-public class AnalyticsDao{
+public class AnalyticsDAO{
 
-	public AnalyticsDao() {
+	public AnalyticsDAO() {
 
 	}
 

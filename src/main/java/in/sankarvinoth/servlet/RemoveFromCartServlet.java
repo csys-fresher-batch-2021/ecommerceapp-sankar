@@ -39,6 +39,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 		String productId = request.getParameter("Id");
 		List<String> productIds = CartService.getAllProductIds();
 		HttpSession session = request.getSession();
+		
 		List<Product> products = (List<Product>) session.getAttribute("productslist");
 		// method to delete the productId respected product object
 		boolean isRemoved = CartService.deleteProductFromCart(products, productId, productIds);

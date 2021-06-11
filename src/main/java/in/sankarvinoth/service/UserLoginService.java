@@ -23,7 +23,7 @@ public class UserLoginService {
 	 */
 	public static boolean userLogin(User user) throws ClassNotFoundException, SQLException {
 		boolean isValidLogin = false;
-		// validating inputs such as username and password
+		// validating inputs such as UserName and password
 		boolean isValidInputs = UserInputsValidator.userLoginValidator(user.getUserName(), user.getPassword());
 		// validating whether the user is registered or not
 		boolean isValidUser = UserValidator.userLoginValidation(user);

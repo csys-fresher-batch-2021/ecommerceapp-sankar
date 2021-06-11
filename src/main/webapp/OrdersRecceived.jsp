@@ -1,9 +1,7 @@
 <%@page import=" java.util.List"%>
 <%@page import="in.sankarvinoth.model.Cart"%>
 <%@page import="in.sankarvinoth.service.CartService"%>
-<%@page import="java.sql.Date"%>
-<%@page import="java.sql.Time"%>
-
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -46,8 +44,8 @@
 						String ProductName = item.getProductName();
 						int productTotal = item.getProductTotal();
 						int quantity = item.getQuantity();
-						Date date = item.getOrderPlacedDate();
-						Time time = item.getOrderPlacedTime();
+						String date = item.getOrderPlacedDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+						String time = item.getOrderPlacedTime().format(DateTimeFormatter.ofPattern("HH:mm"));
 				%>
 				<tr>
 					<td><%=i%></td>

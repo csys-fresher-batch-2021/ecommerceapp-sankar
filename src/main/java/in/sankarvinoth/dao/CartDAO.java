@@ -6,7 +6,7 @@ import in.sankarvinoth.exceptions.DBException;
 import in.sankarvinoth.model.Cart;
 import in.sankarvinoth.model.Product;
 
-public interface CartDao {
+public interface CartDAO {
 	// method declarations
 	List<Product> getAllProducts(List<String> productIds);
 

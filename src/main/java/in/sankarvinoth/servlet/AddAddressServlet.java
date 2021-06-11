@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import in.sankarvinoth.dao.UserDao;
+import in.sankarvinoth.dao.UserDAO;
 
 /**
  * Servlet implementation class AddAddressServlet
@@ -18,9 +18,9 @@ public class AddAddressServlet extends HttpServlet {
   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 // getting the form data
-		String Username=request.getParameter("username");
+		String UserName=request.getParameter("username");
 		String address=request.getParameter("address");
-		UserDao.updateUserAddress(address,Username);
+		UserDAO.updateUserAddress(address,UserName);
 		
 	}
 
