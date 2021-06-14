@@ -13,3 +13,4 @@
 #### 10) Order Placement feature
 #### 11) Forgot Password Feature
 #### 12) Issues and Messages from customers to admin feature
+#### 13) ProductName vs QunatitiesSold Analytics
